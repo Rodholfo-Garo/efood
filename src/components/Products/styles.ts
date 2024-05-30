@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
@@ -7,9 +6,7 @@ export const Card = styled.div`
   position: relative;
 
   ${TagContainer} {
-    position: absolute;
-    right: 16px;
-    top: 16px;
+    margin-right: 8px;
   }
 `
 
@@ -37,5 +34,15 @@ export const Nota = styled.div`
 `
 
 export const Descricao = styled.div`
+  display: block;
   padding: 16px 0 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+`
+
+export const Infos = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
 `

@@ -1,30 +1,58 @@
-import { Card, Title, Descricao, Avaliacao, Nota, Content } from './styles'
+import {
+  Card,
+  Title,
+  Descricao,
+  Avaliacao,
+  Nota,
+  Content,
+  Infos
+} from './styles'
 import star from '../../assets/images/estrela.png'
 import Button from '../Button'
 import Tag from '../Tag'
 
-export const Product = () => (
+type Props = {
+  prominence?: string
+  category: string
+  title: string
+  note: number
+  description: string
+  infos?: string[]
+  image: string
+}
+
+export const Product = ({
+  prominence,
+  category,
+  description,
+  infos,
+  note,
+  title,
+  image
+}: Props) => (
   <>
     <div className="container">
       <Card>
-        <img src="//placehold.it/472x217" alt="produto"></img>
-        <Tag>Destaque da Semana</Tag>
-        <Tag>Japonesa</Tag>
+        <img src={image} alt={title} />
+        <Infos>
+          {infos && infos.map((info) => <Tag key={info}>{info}</Tag>)}
+        </Infos>
         <Content>
           <Avaliacao>
-            <Title>Hioki Sushi</Title>
+            <Title>{title}</Title>
             <Nota>
-              <span>4.9</span>
+              <span>{note}</span>
               <img src={star} alt="" />
             </Nota>
           </Avaliacao>
-          <Descricao>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quas
-            iure unde non ut ab, corporis perferendis officia accusantium? Atque
-            fugit natus illo minima. Suscipit amet esse cupiditate deleniti
-            neque?
-          </Descricao>
-          <Button />
+          <Descricao>{description}</Descricao>
+          <Button
+            type="link"
+            to="/produto"
+            title="Clique aqui para aproveitar esta oferta"
+          >
+            Saiba Mais
+          </Button>
         </Content>
       </Card>
     </div>
