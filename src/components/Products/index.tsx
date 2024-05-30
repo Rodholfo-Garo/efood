@@ -12,8 +12,6 @@ import Button from '../Button'
 import Tag from '../Tag'
 
 type Props = {
-  prominence?: string
-  category: string
   title: string
   note: number
   description: string
@@ -21,15 +19,7 @@ type Props = {
   image: string
 }
 
-export const Product = ({
-  prominence,
-  category,
-  description,
-  infos,
-  note,
-  title,
-  image
-}: Props) => (
+export const Product = ({ description, infos, note, title, image }: Props) => (
   <>
     <div className="container">
       <Card>
