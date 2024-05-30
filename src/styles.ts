@@ -3,11 +3,9 @@ import { createGlobalStyle } from 'styled-components'
 //Cores do Projeto
 
 export const cores = {
-  branca: '#eee',
-  preta: '#111',
-  cinza: '#333',
-  verde: '#10AC84',
-  cinzaClaro: '#a3a3a3'
+  larajaEscuro: '#E66767',
+  corFundo: '#FFF8F2',
+  textoBotao: '#FFEBD9'
 }
 
 // Reset CSS
@@ -21,8 +19,8 @@ export const GlobalCss = createGlobalStyle`
 }
 
 body{
-  background-color:${cores.preta};
-  color:${cores.branca};
+  background-color:${cores.corFundo};
+  color:${cores.larajaEscuro};
   padding-top:40px;
 }
 .container{

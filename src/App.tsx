@@ -1,14 +1,14 @@
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalCss } from './styles'
-
+import Banner from './components/Banner'
+import ProductList from './components/ProductsList'
 
 function App() {
   return (
     <BrowserRouter>
       <GlobalCss />
-      <div className="container">
-      Ola Mundo
-      </div>
+      <Banner />
+      <ProductList />
     </BrowserRouter>
   )
 }
