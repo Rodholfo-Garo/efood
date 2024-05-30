@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
+import { cores } from '../../styles'
 
 export const Card = styled.div`
   margin-bottom: 40px;
@@ -11,7 +12,10 @@ export const Card = styled.div`
 `
 
 export const Content = styled.div`
-  padding: 8px;
+  margin-top: -6px;
+  padding: 8px 8px 10px 8px;
+  border: 1px solid ${cores.larajaEscuro};
+  display: block;
 `
 
 export const Avaliacao = styled.div`
@@ -43,6 +47,6 @@ export const Descricao = styled.div`
 
 export const Infos = styled.div`
   position: absolute;
-  top: 8px;
+  top: 16px;
   right: 8px;
 `
