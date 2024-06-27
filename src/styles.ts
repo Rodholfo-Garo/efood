@@ -22,7 +22,6 @@ export const GlobalCss = createGlobalStyle`
 body{
   background-color:${cores.corFundo};
   color:${cores.larajaEscuro};
-  padding-top:40px;
 }
 .container{
   max-width: 1024px;

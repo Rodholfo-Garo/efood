@@ -4,7 +4,7 @@ type Props = {
   type: 'button' | 'link'
   title: string
   to?: string
-  // Permite o recebimento de uma função que não tem agumentos
+  // Permite o recebimento de uma função que não tem argumentos
   onClick?: () => void
   // texto do botão
   children: string

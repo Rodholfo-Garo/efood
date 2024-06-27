@@ -11,6 +11,8 @@ import star from '../../assets/images/estrela.png'
 import Button from '../Button'
 import Tag from '../Tag'
 
+// Como cada Card pode ter informações diferentes, trabalhamos com um array de strings e apartir dele fazemos a renderização das tags, cada tag renderiza um item do array.
+
 type Props = {
   title: string
   note: number
@@ -18,6 +20,8 @@ type Props = {
   infos?: string[]
   image: string
 }
+
+// :Props aplica a tipagem.
 
 export const Product = ({ description, infos, note, title, image }: Props) => (
   <>
@@ -38,7 +42,7 @@ export const Product = ({ description, infos, note, title, image }: Props) => (
           <Descricao>{description}</Descricao>
           <Button
             type="link"
-            to="/produto"
+            to="/perfil"
             title="Clique aqui para aproveitar esta oferta"
           >
             Saiba Mais
