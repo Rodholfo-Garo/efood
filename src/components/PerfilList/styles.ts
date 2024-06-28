@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
-  margin-top: 80px;
+  margin-top: 56px;
 `
 
 export const Lista = styled.ul`

@@ -14,7 +14,8 @@ export const Card = styled.div`
 export const Content = styled.div`
   margin-top: -6px;
   padding: 8px 8px 10px 8px;
-  border: 1px solid ${cores.larajaEscuro};
+  border: 1px solid ${cores.corFundo};
+  background-color: #fff;
   display: block;
 `
 

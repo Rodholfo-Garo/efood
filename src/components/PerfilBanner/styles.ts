@@ -17,6 +17,10 @@ export const Header = styled.div`
     img {
       margin-left: 96px;
     }
+    h3 {
+      font-size: 18px;
+      font-weight: 900;
+    }
   }
 `
 
@@ -25,4 +29,25 @@ export const Apresentacao = styled.div`
   height: 280px;
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 25px 0 32px 0;
+  color: #fff;
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+
+    h2 {
+      font-size: 32px;
+      font-weight: 100;
+      margin-top:302px:
+    }
+
+    h1{
+      font-size:32px;
+      font-weught:900;
+    }
+  }
+
 `

@@ -8,7 +8,7 @@ export const PerfilBanner = () => (
   <>
     <Header style={{ backgroundImage: `url(${vetor})` }}>
       <div className="container">
-        <h3>Restaurante </h3>
+        <h3>Restaurantes</h3>
         <Link to="/">
           <img src={logo} alt="efood" />
         </Link>
@@ -18,9 +18,13 @@ export const PerfilBanner = () => (
         </h3>
       </div>
     </Header>
-    <Apresentacao
-      style={{ backgroundImage: `url(${fundoPerfil})` }}
-    ></Apresentacao>
+
+    <Apresentacao style={{ backgroundImage: `url(${fundoPerfil})` }}>
+      <div className="container">
+        <h2>Italiana</h2>
+        <h1>La Dolce Vita Trattoria</h1>
+      </div>
+    </Apresentacao>
   </>
 )
 

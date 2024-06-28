@@ -12,7 +12,6 @@ export const Card = styled.div`
 export const Content = styled.div`
   border: 1px solid ${cores.larajaEscuro};
   display: block;
-  padding: 8px 0;
   color: ${cores.textoBotao};
 
   ${ButtonContainer} {
