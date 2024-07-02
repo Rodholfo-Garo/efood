@@ -9,13 +9,14 @@ export const PerfilBanner = () => (
     <Header style={{ backgroundImage: `url(${vetor})` }}>
       <div className="container">
         <h3>Restaurantes</h3>
+
         <Link to="/">
           <img src={logo} alt="efood" />
         </Link>
 
-        <h3>
+        <h4>
           <span>0</span> produto(s) no carrinho
-        </h3>
+        </h4>
       </div>
     </Header>
 

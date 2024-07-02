@@ -6,8 +6,8 @@ export const Header = styled.div`
   padding: 64px 0 40px;
 
   .container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     height: 100%;
     font-size: 18px;
@@ -15,11 +15,13 @@ export const Header = styled.div`
     margin: 0 auto;
 
     img {
-      margin-left: 96px;
+      grid-column: 2;
     }
-    h3 {
+    h4 {
+      grid-column: 3;
       font-size: 18px;
       font-weight: 900;
+      text-align: right;
     }
   }
 `
