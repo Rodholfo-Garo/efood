@@ -6,6 +6,12 @@ export const Card = styled.div`
   margin-bottom: 40px;
   position: relative;
 
+  > img {
+    display: block;
+    width: 100%;
+    height: 217px;
+  }
+
   ${TagContainer} {
     margin-right: 8px;
   }
@@ -17,6 +23,7 @@ export const Content = styled.div`
   border: 1px solid ${cores.corFundo};
   background-color: #fff;
   display: block;
+  border: 1px solid ${cores.larajaEscuro};
 `
 
 export const Avaliacao = styled.div`

@@ -1,30 +1,45 @@
-import Pratos from '../../models/Pratos'
+import { cardapioDePratos } from '../../pages/Home'
 import Product from '../Products'
 import { Lista, Container } from './styles'
 
 export type Props = {
-  pratos: Pratos[]
+  pratos: cardapioDePratos[]
 }
 
-export const ProductList = ({ pratos }: Props) => (
-  <>
-    <div className="container">
-      <Container>
-        <Lista>
-          {pratos.map((prato) => (
-            <Product
-              key={prato.id}
-              image={prato.image}
-              infos={prato.infos}
-              note={prato.note}
-              description={prato.description}
-              title={prato.title}
-            />
-          ))}
-        </Lista>
-      </Container>
-    </div>
-  </>
-)
+export const ProductList = ({ pratos }: Props) => {
+  const getPratosTag = (prato: cardapioDePratos) => {
+    const tags = []
+
+    if (prato.tipo) {
+      tags.push(prato.tipo)
+    }
+
+    if (prato.destacado) {
+      tags.push(prato.destacado)
+    }
+    return tags
+  }
+
+  return (
+    <>
+      <div className="container">
+        <Container>
+          <Lista>
+            {pratos.map((prato) => (
+              <Product
+                key={prato.id}
+                image={prato.capa}
+                infos={getPratosTag(prato)}
+                note={prato.avaliacao}
+                description={prato.descricao}
+                title={prato.titulo}
+              />
+            ))}
+          </Lista>
+        </Container>
+      </div>
+    </>
+  )
+}
 
 export default ProductList
