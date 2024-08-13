@@ -4,9 +4,14 @@ import { Items, Item, Container, Modal, ModalContent } from './styles'
 import fechar from '../../assets/images/close 1.png'
 import Marguerita from '../../assets/images/pizzaPerfil.png'
 import { useState } from 'react'
+import { cardapioDePratos } from '../../pages/Home'
+
+// export type Props = {
+//   pratos: PratosPerfil[]
+// }
 
 export type Props = {
-  pratos: PratosPerfil[]
+  pratos: cardapioDePratos[]
 }
 
 export const PerfilList = ({ pratos }: Props) => {
@@ -24,10 +29,10 @@ export const PerfilList = ({ pratos }: Props) => {
             <Item>
               {pratos.map((prato) => (
                 <PerfilProducts
-                  key={prato.id}
-                  image={prato.image}
-                  description={prato.description}
-                  title={prato.title}
+                  key={prato.cardapio.id}
+                  image={prato.cardapio.foto}
+                  description={prato.cardapio.decricao}
+                  title={prato.cardapio.nome}
                   abrirModal={abrirModal}
                 />
               ))}

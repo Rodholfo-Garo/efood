@@ -15,7 +15,7 @@ export const ProductList = ({ pratos }: Props) => {
     }
 
     if (prato.destacado) {
-      tags.push(prato.destacado)
+      tags.push('Destaque da Semana')
     }
     return tags
   }
