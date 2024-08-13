@@ -1,4 +1,3 @@
-import PratosPerfil from '../../models/PratosPerfil'
 import PerfilProducts from '../PerfilProducts'
 import { Items, Item, Container, Modal, ModalContent } from './styles'
 import fechar from '../../assets/images/close 1.png'
@@ -26,17 +25,19 @@ export const PerfilList = ({ pratos }: Props) => {
       <div className="container">
         <Container>
           <Items>
-            <Item>
-              {pratos.map((prato) => (
-                <PerfilProducts
-                  key={prato.cardapio.id}
-                  image={prato.cardapio.foto}
-                  description={prato.cardapio.decricao}
-                  title={prato.cardapio.nome}
-                  abrirModal={abrirModal}
-                />
-              ))}
-            </Item>
+            {pratos.map((prato) => (
+              <Item key={prato.id}>
+                {prato.cardapio.map((item) => (
+                  <PerfilProducts
+                    key={item.id}
+                    image={item.foto}
+                    description={item.descricao}
+                    title={item.nome}
+                    abrirModal={abrirModal}
+                  />
+                ))}
+              </Item>
+            ))}
           </Items>
         </Container>
         <Modal className={modalEstaAberto ? 'visivel' : ''}>

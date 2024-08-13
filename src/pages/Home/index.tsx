@@ -15,9 +15,9 @@ export type cardapioDePratos = {
     preco: number
     id: number
     nome: string
-    decricao: string
+    descricao: string
     porcao: string
-  }
+  }[]
 }
 
 const Home = () => {
