@@ -1,13 +1,13 @@
-import { cardapioDePratos } from '../../pages/Home'
+import { CardapioDePratos } from '../../pages/Home'
 import Product from '../Products'
 import { Lista, Container } from './styles'
 
 export type Props = {
-  pratos: cardapioDePratos[]
+  pratos: CardapioDePratos[]
 }
 
 export const ProductList = ({ pratos }: Props) => {
-  const getPratosTag = (prato: cardapioDePratos) => {
+  const getPratosTag = (prato: CardapioDePratos) => {
     const tags = []
 
     if (prato.tipo) {
@@ -15,7 +15,7 @@ export const ProductList = ({ pratos }: Props) => {
     }
 
     if (prato.destacado) {
-      tags.push(prato.destacado)
+      tags.push('Destaque da Semana')
     }
     return tags
   }
@@ -28,6 +28,7 @@ export const ProductList = ({ pratos }: Props) => {
             {pratos.map((prato) => (
               <Product
                 key={prato.id}
+                id={prato.id}
                 image={prato.capa}
                 infos={getPratosTag(prato)}
                 note={prato.avaliacao}

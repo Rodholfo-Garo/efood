@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const FooterContainer = styled.div`
   heigth: 298px;
   padding: 40px 0 40px 0;
+  margin-top: 120px;
 `
 
 export const FooterInfos = styled.div`

@@ -1,19 +1,44 @@
-import PratosPerfil from '../../models/PratosPerfil'
 import PerfilProducts from '../PerfilProducts'
-import { Items, Item, Container, Modal, ModalContent } from './styles'
+import {
+  Items,
+  Item,
+  Container,
+  Modal,
+  ModalContent,
+  BtnFechar,
+  ModalContentFoto,
+  ModalContentTexto,
+  ModalAberto
+} from './styles'
 import fechar from '../../assets/images/close 1.png'
 import Marguerita from '../../assets/images/pizzaPerfil.png'
 import { useState } from 'react'
+import { CardapioDePratos } from '../../pages/Home'
+import Button from '../Button'
 
 export type Props = {
-  pratos: PratosPerfil[]
+  pratos: CardapioDePratos[]
 }
 
 export const PerfilList = ({ pratos }: Props) => {
-  const [modalEstaAberto, setModalEstaAberto] = useState(false)
+  const formataPreco = (preco: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(preco)
+  }
 
-  const abrirModal = () => {
-    setModalEstaAberto(true)
+  const [modalEstaAberto, setModalEstaAberto] = useState(false) // Estado para controlar a visibilidade do modal
+
+  // estado itemSelecionado para armazenar o item do cardápio que foi selecionado.
+  const [itemSelecionado, setItemSelecionado] = useState<
+    CardapioDePratos['cardapio'][0] | null
+  >(null) // Estado para armazenar o item selecionado
+
+  //função abrirModal para definir o item selecionado e abrir o modal.
+  const abrirModal = (item: CardapioDePratos['cardapio'][0]) => {
+    setItemSelecionado(item) // Atualiza o estado com o item selecionado
+    setModalEstaAberto(true) // Abre o modal
   }
 
   return (
@@ -21,51 +46,57 @@ export const PerfilList = ({ pratos }: Props) => {
       <div className="container">
         <Container>
           <Items>
-            <Item>
-              {pratos.map((prato) => (
-                <PerfilProducts
-                  key={prato.id}
-                  image={prato.image}
-                  description={prato.description}
-                  title={prato.title}
-                  abrirModal={abrirModal}
-                />
-              ))}
-            </Item>
+            {pratos.map((prato) =>
+              // Mapeia os itens do cardápio de cada prato
+              prato.cardapio.map((item) => (
+                <Item key={item.id}>
+                  <PerfilProducts
+                    id={item.id}
+                    image={item.foto}
+                    description={item.descricao}
+                    title={item.nome}
+                    abrirModal={() => abrirModal(item)} // Passa a função para abrir o modal com o item selecionado
+                  />
+                </Item>
+              ))
+            )}
           </Items>
         </Container>
         <Modal className={modalEstaAberto ? 'visivel' : ''}>
           <ModalContent className="container">
-            <div>
+            <BtnFechar>
               <img
                 src={fechar}
                 alt="Icone Fechar"
-                onClick={() => setModalEstaAberto(false)}
+                onClick={() => setModalEstaAberto(false)} // Fecha o modal ao clicar na imagem
               />
-            </div>
-            <div>
-              <div>
-                <img src={Marguerita} alt="" />
-              </div>
-              <h3>Pizza Marguerita</h3>
-              <p>
-                A pizza Margherita é uma pizza clássica da culinária italiana,
-                reconhecida por sua simplicidade e sabor inigualável. Ela é
-                feita com uma base de massa fina e crocante, coberta com molho
-                de tomate fresco, queijo mussarela de alta qualidade, manjericão
-                fresco e azeite de oliva extra-virgem. A combinação de sabores é
-                perfeita, com o molho de tomate suculento e ligeiramente ácido,
-                o queijo derretido e cremoso e as folhas de manjericão frescas,
-                que adicionam um toque de sabor herbáceo. É uma pizza simples,
-                mas deliciosa, que agrada a todos os paladares e é uma ótima
-                opção para qualquer ocasião. Serve: de 2 a 3 pessoas
-              </p>
-              <button>Adicionar ao carrinho - R$60,00</button>
-            </div>
+            </BtnFechar>
+            {/* Estado itemSelecionado para renderizar a imagem, nome, descrição e preço no modal. */}
+            {itemSelecionado && (
+              <ModalAberto>
+                <ModalContentFoto>
+                  <img src={itemSelecionado.foto} alt={itemSelecionado.nome} />
+                  {/* Usa o estado do item selecionado para renderizar a imagem */}
+                </ModalContentFoto>
+                <ModalContentTexto>
+                  {/* Usa o estado do item selecionado para renderizar o nome */}
+                  <h3>{itemSelecionado.nome}</h3>
+                  {/* Usa o estado do item selecionado para renderizar a descrição */}
+                  <p>{itemSelecionado.descricao}</p>
+                  <p>{itemSelecionado.porcao}</p>
+                  <Button type="button" title="Comprar">
+                    {`Adicionar ao carrinho - ${formataPreco(
+                      itemSelecionado.preco
+                    )}`}
+                  </Button>
+                </ModalContentTexto>
+                {/* Usa o estado do item selecionado para renderizar o preço */}
+              </ModalAberto>
+            )}
           </ModalContent>
           <div
             className="overlay"
-            onClick={() => setModalEstaAberto(false)}
+            onClick={() => setModalEstaAberto(false)} // Fecha o modal ao clicar na sobreposição
           ></div>
         </Modal>
       </div>

@@ -1,9 +1,12 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { cores } from '../../styles'
 
 export const Header = styled.div`
   width: 100%;
   height: 186px;
   padding: 64px 0 40px;
+  text-decoration: none;
 
   .container {
     display: grid;
@@ -52,4 +55,12 @@ export const Apresentacao = styled.div`
     }
   }
 
+`
+
+export const HomeLink = styled(Link)`
+  text-decoration: none;
+
+  &:visited {
+    color: ${cores.larajaEscuro};
+  }
 `

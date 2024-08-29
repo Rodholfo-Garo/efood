@@ -1,32 +1,41 @@
 import vetor from '../../assets/images/vetor.png'
 import logo from '../../assets/images/logo.png'
 import fundoPerfil from '../../assets/images/imagem_de_fundo.png'
-import { Header, Apresentacao } from './styles'
+import { Header, Apresentacao, HomeLink } from './styles'
 import { Link } from 'react-router-dom'
+import { CardapioDePratos } from '../../pages/Home'
 
-export const PerfilBanner = () => (
-  <>
-    <Header style={{ backgroundImage: `url(${vetor})` }}>
-      <div className="container">
-        <h3>Restaurantes</h3>
+export type Props = {
+  prato: CardapioDePratos
+}
 
-        <Link to="/">
-          <img src={logo} alt="efood" />
-        </Link>
+export const PerfilBanner = ({ prato }: Props) => {
+  return (
+    <>
+      <Header style={{ backgroundImage: `url(${vetor})` }}>
+        <div className="container">
+          <HomeLink to="/">
+            <h3>Restaurantes</h3>
+          </HomeLink>
 
-        <h4>
-          <span>0</span> produto(s) no carrinho
-        </h4>
-      </div>
-    </Header>
+          <Link to="/">
+            <img src={logo} alt="efood" />
+          </Link>
 
-    <Apresentacao style={{ backgroundImage: `url(${fundoPerfil})` }}>
-      <div className="container">
-        <h2>Italiana</h2>
-        <h1>La Dolce Vita Trattoria</h1>
-      </div>
-    </Apresentacao>
-  </>
-)
+          <h4>
+            <span>0</span> produto(s) no carrinho
+          </h4>
+        </div>
+      </Header>
+
+      <Apresentacao style={{ backgroundImage: `url(${fundoPerfil})` }}>
+        <div className="container">
+          <h2>{prato.tipo}</h2>
+          <h1>{prato.titulo}</h1>
+        </div>
+      </Apresentacao>
+    </>
+  )
+}
 
 export default PerfilBanner

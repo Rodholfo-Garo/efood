@@ -3,10 +3,16 @@ import { cores } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Card = styled.div`
-  margin-bottom: 40px;
   position: relative;
   padding: 8px;
   background-color: ${cores.larajaEscuro};
+
+  img {
+    display: block;
+    width: 100%;
+    height: 167px;
+    object-fit: cover;
+  }
 `
 
 export const Content = styled.div`
