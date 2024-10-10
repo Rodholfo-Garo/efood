@@ -11,13 +11,12 @@ import {
   ModalAberto
 } from './styles'
 import fechar from '../../assets/images/close 1.png'
-import Marguerita from '../../assets/images/pizzaPerfil.png'
 import { useState } from 'react'
-import { CardapioDePratos } from '../../pages/Home'
+import { Restaurantes } from '../../pages/Home'
 import Button from '../Button'
 
 export type Props = {
-  pratos: CardapioDePratos[]
+  pratos: Restaurantes[]
 }
 
 export const PerfilList = ({ pratos }: Props) => {
@@ -32,11 +31,11 @@ export const PerfilList = ({ pratos }: Props) => {
 
   // estado itemSelecionado para armazenar o item do cardápio que foi selecionado.
   const [itemSelecionado, setItemSelecionado] = useState<
-    CardapioDePratos['cardapio'][0] | null
+    Restaurantes['cardapio'][0] | null
   >(null) // Estado para armazenar o item selecionado
 
   //função abrirModal para definir o item selecionado e abrir o modal.
-  const abrirModal = (item: CardapioDePratos['cardapio'][0]) => {
+  const abrirModal = (item: Restaurantes['cardapio'][0]) => {
     setItemSelecionado(item) // Atualiza o estado com o item selecionado
     setModalEstaAberto(true) // Abre o modal
   }

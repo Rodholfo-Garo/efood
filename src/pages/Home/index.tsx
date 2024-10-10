@@ -2,17 +2,9 @@ import { useEffect, useState } from 'react'
 import Banner from '../../components/Banner'
 import ProductList from '../../components/ProductsList'
 import Footer from '../../components/Footer'
+import { useGetRestaurantesQuery } from '../../services/api'
 
-export type Cardapio = {
-  foto: string
-  preco: number
-  id: number
-  nome: string
-  descricao: string
-  porcao?: string
-}
-
-export type CardapioDePratos = {
+export type Restaurantes = {
   id: number
   titulo: string
   destacado?: boolean
@@ -23,14 +15,17 @@ export type CardapioDePratos = {
   cardapio: Cardapio[]
 }
 
-const Home = () => {
-  const [pratos, setPratos] = useState<CardapioDePratos[]>([])
+export type Cardapio = {
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao?: string
+}
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setPratos(res))
-  }, [])
+const Home = () => {
+  const { data: pratos = [], isLoading } = useGetRestaurantesQuery()
 
   return (
     <>

@@ -30,7 +30,7 @@ export const PerfilProduct = ({
             <Title>{title}</Title>
             <Descricao>{getDescricao(description)}</Descricao>
             <Button type="button" title="Comprar" onClick={abrirModal}>
-              Adicionar ao carrinho
+              Mais detalhes
             </Button>
           </Content>
         </Card>

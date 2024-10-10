@@ -2,14 +2,14 @@ import PerfilBanner from '../../components/PerfilBanner'
 import PerfilList from '../../components/PerfilList'
 import Footer from '../../components/Footer'
 import { useParams } from 'react-router-dom'
-import { CardapioDePratos } from '../Home'
+import { Restaurantes } from '../Home'
 import { useEffect, useState } from 'react'
 
 const Perfil = () => {
   const { id } = useParams() // Obtém o ID da URL
 
   // A API está retornando um objeto em vez de um array. Portanto, ajustamos o estado prato para ser um objeto do tipo CardapioDePratos ou null inicialmente.
-  const [prato, setPrato] = useState<CardapioDePratos | null>(null) // Estado para armazenar os dados do prato
+  const [prato, setPrato] = useState<Restaurantes | null>(null) // Estado para armazenar os dados do prato
 
   useEffect(() => {
     // Faz a requisição para a API usando o ID

@@ -1,13 +1,13 @@
-import { CardapioDePratos } from '../../pages/Home'
+import { Restaurantes } from '../../pages/Home'
 import Product from '../Products'
 import { Lista, Container } from './styles'
 
 export type Props = {
-  pratos: CardapioDePratos[]
+  pratos: Restaurantes[]
 }
 
 export const ProductList = ({ pratos }: Props) => {
-  const getPratosTag = (prato: CardapioDePratos) => {
+  const getPratosTag = (prato: Restaurantes) => {
     const tags = []
 
     if (prato.tipo) {

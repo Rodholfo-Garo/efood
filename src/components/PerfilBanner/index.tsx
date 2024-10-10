@@ -3,10 +3,10 @@ import logo from '../../assets/images/logo.png'
 import fundoPerfil from '../../assets/images/imagem_de_fundo.png'
 import { Header, Apresentacao, HomeLink } from './styles'
 import { Link } from 'react-router-dom'
-import { CardapioDePratos } from '../../pages/Home'
+import { Restaurantes } from '../../pages/Home'
 
 export type Props = {
-  prato: CardapioDePratos
+  prato: Restaurantes
 }
 
 export const PerfilBanner = ({ prato }: Props) => {
