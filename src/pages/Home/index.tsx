@@ -31,7 +31,6 @@ const Home = () => {
     <>
       <Banner />
       <ProductList pratos={pratos} />
-      <Footer />
     </>
   )
 }
