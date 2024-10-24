@@ -19,9 +19,13 @@ export const CartContainer = styled.div`
   left;0;
   width:100%;
   height:100%;
-  display:flex;
+  display:none;
   justify-content:flex-end;
   z-index:1;
+
+  &.is-open {
+   display:flex;
+  }
 `
 
 export const SideBar = styled.aside`
@@ -46,11 +50,11 @@ export const Prices = styled.p`
   display: flex;
   justify-content: space-between;
   line-height: 16.41px;
-  margin-bottom: 16px;
+  margin: 40px 0 16px 0;
 `
 export const CartItem = styled.li`
   display: flex;
-  background-color: #ffff;
+  background-color: ${cores.textoBotao};
   padding: 8px 8px 12px 8px;
   margin-bottom: 16px;
   position: relative;
@@ -81,5 +85,6 @@ export const CartItem = styled.li`
     position: absolute;
     bottom: 8px;
     right: 8px;
+    cursor: pointer;
   }
 `

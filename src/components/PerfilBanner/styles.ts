@@ -25,6 +25,7 @@ export const Header = styled.div`
       font-size: 18px;
       font-weight: 900;
       text-align: right;
+      cursor: pointer;
     }
   }
 `
@@ -63,4 +64,7 @@ export const HomeLink = styled(Link)`
   &:visited {
     color: ${cores.larajaEscuro};
   }
+`
+export const CartLink = styled.a`
+  display: flex;
 `

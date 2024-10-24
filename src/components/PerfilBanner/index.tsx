@@ -5,11 +5,23 @@ import { Header, Apresentacao, HomeLink } from './styles'
 import { Link } from 'react-router-dom'
 import { Restaurantes } from '../../pages/Home'
 
+import { open } from '../../store/reducers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+
 export type Props = {
   prato: Restaurantes
 }
 
 export const PerfilBanner = ({ prato }: Props) => {
+  const dispatch = useDispatch()
+
+  // Adicionar Item ao carrinho
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+  const openCart = () => {
+    dispatch(open())
+  }
   return (
     <>
       <Header style={{ backgroundImage: `url(${vetor})` }}>
@@ -22,8 +34,9 @@ export const PerfilBanner = ({ prato }: Props) => {
             <img src={logo} alt="efood" />
           </Link>
 
-          <h4>
-            <span>0</span> produto(s) no carrinho
+          <h4 onClick={openCart}>
+            {/* adicionar item ao carrinho */}
+            <span>{items.length}</span> produto(s) no carrinho
           </h4>
         </div>
       </Header>

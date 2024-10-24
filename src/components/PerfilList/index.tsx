@@ -12,24 +12,32 @@ import {
 } from './styles'
 import fechar from '../../assets/images/close 1.png'
 import { useState } from 'react'
-import { Restaurantes } from '../../pages/Home'
+import { Cardapio, Restaurantes } from '../../pages/Home'
 import Button from '../Button'
+import { useDispatch, useSelector } from 'react-redux'
+import { open, add } from '../../store/reducers/cart'
 
 export type Props = {
   pratos: Restaurantes[]
 }
 
+export const formataPreco = (preco: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
 export const PerfilList = ({ pratos }: Props) => {
-  const formataPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
+  const dispatch = useDispatch()
+
+  // Função para adicionar o item selecionado ao carrinho
+  const addToCart = (item: Cardapio) => {
+    console.log('Adicionando ao carrinho:', item) // Verifica no console se o item está correto
+    dispatch(add(item)) // Adiciona o item ao carrinho
+    dispatch(open()) // Abre o carrinho
   }
 
   const [modalEstaAberto, setModalEstaAberto] = useState(false) // Estado para controlar a visibilidade do modal
-
-  // estado itemSelecionado para armazenar o item do cardápio que foi selecionado.
   const [itemSelecionado, setItemSelecionado] = useState<
     Restaurantes['cardapio'][0] | null
   >(null) // Estado para armazenar o item selecionado
@@ -70,26 +78,25 @@ export const PerfilList = ({ pratos }: Props) => {
                 onClick={() => setModalEstaAberto(false)} // Fecha o modal ao clicar na imagem
               />
             </BtnFechar>
-            {/* Estado itemSelecionado para renderizar a imagem, nome, descrição e preço no modal. */}
             {itemSelecionado && (
               <ModalAberto>
                 <ModalContentFoto>
                   <img src={itemSelecionado.foto} alt={itemSelecionado.nome} />
-                  {/* Usa o estado do item selecionado para renderizar a imagem */}
                 </ModalContentFoto>
                 <ModalContentTexto>
-                  {/* Usa o estado do item selecionado para renderizar o nome */}
                   <h3>{itemSelecionado.nome}</h3>
-                  {/* Usa o estado do item selecionado para renderizar a descrição */}
                   <p>{itemSelecionado.descricao}</p>
                   <p>{itemSelecionado.porcao}</p>
-                  <Button type="button" title="Comprar">
+                  <Button
+                    onClick={() => addToCart(itemSelecionado)}
+                    type="button"
+                    title="Comprar"
+                  >
                     {`Adicionar ao carrinho - ${formataPreco(
                       itemSelecionado.preco
                     )}`}
                   </Button>
                 </ModalContentTexto>
-                {/* Usa o estado do item selecionado para renderizar o preço */}
               </ModalAberto>
             )}
           </ModalContent>

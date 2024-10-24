@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Container = styled.section`
@@ -10,6 +10,10 @@ export const Items = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr); // Três colunas
   gap: 32px; // Espaçamento entre os itens
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `
 
 export const Item = styled.li`

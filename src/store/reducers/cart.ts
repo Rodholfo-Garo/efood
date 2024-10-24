@@ -3,10 +3,13 @@ import { Cardapio } from '../../pages/Home'
 
 type CartState = {
   items: Cardapio[]
+  // Propriedade que diz se o carrinho esta fechado ou aberto
+  isOpen: boolean
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  isOpen: false
 }
 
 const cartSlice = createSlice({
@@ -15,6 +18,15 @@ const cartSlice = createSlice({
   reducers: {
     add: (state, action: PayloadAction<Cardapio>) => {
       state.items.push(action.payload)
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload)
+    },
+    open: (state) => {
+      state.isOpen = true
+    },
+    close: (state) => {
+      state.isOpen = false
     }
   }
 })
@@ -23,5 +35,5 @@ const cartSlice = createSlice({
 
 cartSlice.actions.add
 
-export const { add } = cartSlice.actions
+export const { add, open, close, remove } = cartSlice.actions
 export default cartSlice.reducer

@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import Banner from '../../components/Banner'
 import ProductList from '../../components/ProductsList'
-import Footer from '../../components/Footer'
 import { useGetRestaurantesQuery } from '../../services/api'
 
 export type Restaurantes = {
