@@ -13,4 +13,7 @@ export const Lista = styled.ul`
   @media (max-width: ${breakpoints.desktop}) {
     column-gap: 0px;
   }
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `

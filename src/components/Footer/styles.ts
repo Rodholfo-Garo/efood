@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../styles'
 
 export const FooterContainer = styled.div`
   heigth: 298px;
@@ -30,4 +31,7 @@ export const FooterCopy = styled.h1`
   width: 480px;
   line-height: 11.72px;
   text-align: center;
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 100%;
+  }
 `

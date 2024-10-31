@@ -11,8 +11,8 @@ export const Items = styled.ul`
   grid-template-columns: repeat(3, 1fr); // Três colunas
   gap: 32px; // Espaçamento entre os itens
 
-  @media (max-width: ${breakpoints.desktop}) {
-    grid-template-columns: 1fr 1fr;
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
   }
 `
 
@@ -34,6 +34,10 @@ export const Modal = styled.div`
 
   &.visivel {
     display: flex;
+    @media (max-width: ${breakpoints.tablet}) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
   }
 
   .overlay {

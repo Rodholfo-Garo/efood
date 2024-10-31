@@ -35,7 +35,7 @@ body{
   margin: 0 auto;
 
   @media(max-width: ${breakpoints.desktop}){
-    max-width: 80%;
+    max-width: 90%;
   }
 }
 `

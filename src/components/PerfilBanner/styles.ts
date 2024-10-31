@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Header = styled.div`
   width: 100%;
@@ -27,6 +27,10 @@ export const Header = styled.div`
       text-align: right;
       cursor: pointer;
     }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
   }
 `
 
@@ -37,6 +41,10 @@ export const Apresentacao = styled.div`
   background-size: cover;
   padding: 25px 0 32px 0;
   color: #fff;
+
+  @media (max-width:${breakpoints.tablet}){
+    background-size: cover;
+  }
 
   .container{
     display: flex;
