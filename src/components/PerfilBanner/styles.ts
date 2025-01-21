@@ -2,35 +2,71 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoints, cores } from '../../styles'
 
-export const Header = styled.div`
+export const Header = styled.header`
   width: 100%;
   height: 186px;
-  padding: 64px 0 40px;
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  background-color: ${cores.larajaEscuro}; /* Ajuste conforme o tema */
   text-decoration: none;
 
-  .container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
+  @media (max-width: ${breakpoints.tablet}) {
     height: 100%;
-    font-size: 18px;
-    font-weight: 900;
-    margin: 0 auto;
+  }
 
-    img {
-      grid-column: 2;
+  .container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    width: 100%;
+    height: 100%;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      display: block;
     }
-    h4 {
-      grid-column: 3;
-      font-size: 18px;
-      font-weight: 900;
-      text-align: right;
-      cursor: pointer;
-    }
+  }
+
+  nav {
+    width: 100%;
 
     @media (max-width: ${breakpoints.tablet}) {
       display: none;
     }
+  }
+`
+
+export const Links = styled.ul`
+  display: flex;
+  justify-content: space-between; /* Coloca os itens nas extremidades */
+  align-items: center; /* Alinha os itens verticalmente */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%; /* Garante que o contêiner ocupe 100% da largura */
+  height: 100%; /* Alinha os itens verticalmente */
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding-bottom: 16px;
+  }
+`
+export const LinkItem = styled.li`
+  display: flex;
+  align-items: center; /* Centraliza os elementos verticalmente */
+  text-decoration: none;
+
+  img {
+    display: block;
+    height: 50px; /* Ajuste o tamanho necessário */
+    width: auto; /* Mantém a proporção */
+    margin: 0 auto; /* Garante que a imagem esteja no centro do <li> */
+  }
+
+  h4 {
+    font-size: 18px;
+    font-weight: 900;
+    text-align: right;
+    cursor: pointer;
   }
 `
 
@@ -42,37 +78,80 @@ export const Apresentacao = styled.div`
   padding: 25px 0 32px 0;
   color: #fff;
 
-  @media (max-width:${breakpoints.tablet}){
+  @media (max-width: ${breakpoints.tablet}) {
     background-size: cover;
   }
 
-  .container{
+  .container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height:100%;
+    height: 100%;
 
     h2 {
       font-size: 32px;
       font-weight: 100;
-      margin-top:302px:
+      margin-top: 302px; /* Corrigido erro de dois pontos */
     }
 
-    h1{
-      font-size:32px;
-      font-weught:900;
+    h1 {
+      font-size: 32px;
+      font-weight: 900; /* Corrigido erro de digitação */
     }
   }
-
 `
 
 export const HomeLink = styled(Link)`
   text-decoration: none;
+  color: inherit; /* Mantém a cor conforme o tema */
+  font-size: 18px;
+  display: flex;
+  font-weight: 900; /* Restaura a espessura da fonte */
+  color: inherit; /* Mantém a cor do tema */
+  align-items: center; /* Alinha centralmente com a imagem */
 
   &:visited {
     color: ${cores.larajaEscuro};
   }
 `
+
 export const CartLink = styled.a`
   display: flex;
+`
+
+export const MenuWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 16px 0;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    display: none;
+  }
+`
+
+export const Hamburguer = styled.div`
+  width: 32px;
+  cursor: pointer;
+  span {
+    height: 2px;
+    display: block;
+    width: 100%;
+    background-color: ${cores.larajaEscuro};
+    margin-bottom: 4px;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) {
+    display: none;
+  }
+`
+
+export const NavMobile = styled.nav`
+  display: none;
+
+  &.is-open {
+    display: block;
+  }
 `

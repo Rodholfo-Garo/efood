@@ -14,6 +14,7 @@ export const Overlay = styled.div`
 `
 
 export const CartContainer = styled.div`
+// Position Fixed tb consegue segurar um elemento com posição absoluta
   position: fixed;
   top:0;
   left;0;
@@ -29,7 +30,7 @@ export const CartContainer = styled.div`
 `
 
 export const SideBar = styled.aside`
-  width: 340px;
+  width: 360px;
   background-color: ${cores.larajaEscuro};
   z-index: 1;
   padding: 32px 8px 0 8px;
@@ -62,6 +63,7 @@ export const CartItem = styled.li`
   img {
     height: 80px;
     width: 80px;
+    // Proporciona um recorte mais agradavel da imagem
     object-fit: cover;
     margin-right: 8px;
   }

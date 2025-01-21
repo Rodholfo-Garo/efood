@@ -8,9 +8,17 @@ type Props = {
   onClick?: () => void
   // texto do botão
   children: string
+  disabled?: boolean
 }
 
-export const Button = ({ type, title, to, onClick, children }: Props) => {
+export const Button = ({
+  type,
+  title,
+  to,
+  onClick,
+  children,
+  disabled
+}: Props) => {
   if (type === 'button') {
     return (
       <ButtonContainer type="button" title={title} onClick={onClick}>

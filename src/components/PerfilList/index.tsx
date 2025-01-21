@@ -14,7 +14,7 @@ import fechar from '../../assets/images/close 1.png'
 import { useState } from 'react'
 import { Cardapio, Restaurantes } from '../../pages/Home'
 import Button from '../Button'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { open, add } from '../../store/reducers/cart'
 
 export type Props = {
@@ -88,7 +88,12 @@ export const PerfilList = ({ pratos }: Props) => {
                   <p>{itemSelecionado.descricao}</p>
                   <p>{itemSelecionado.porcao}</p>
                   <Button
-                    onClick={() => addToCart(itemSelecionado)}
+                    onClick={() => {
+                      if (itemSelecionado) {
+                        addToCart(itemSelecionado) // Adiciona o item ao carrinho
+                        setModalEstaAberto(false) // Fecha o modal após adicionar ao carrinho
+                      }
+                    }}
                     type="button"
                     title="Comprar"
                   >
