@@ -91,7 +91,6 @@ export const Apresentacao = styled.div`
     h2 {
       font-size: 32px;
       font-weight: 100;
-      margin-top: 302px; /* Corrigido erro de dois pontos */
     }
 
     h1 {

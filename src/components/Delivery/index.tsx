@@ -5,9 +5,13 @@ import { InputGroup, Row, ButtomContainer } from './styles'
 import FormCard from '../FormCard'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { usePurchaseMutation } from '../../services/api'
 
 const Delivery = () => {
   const dispatch = useDispatch()
+
+  // api
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -40,6 +44,18 @@ const Delivery = () => {
     // Valida o formulario quando a pagina for carregada
     validateOnMount: false,
     onSubmit: (values) => {
+      purchase({
+        delivery: {
+          receiver: values.fullName,
+          address: {
+            description: values.address,
+            city: values.city,
+            zipCode: values.cep,
+            number: Number(values.houseNumber),
+            complement: values.complement
+          }
+        }
+      })
       // Processa o envio e navega para a próxima etapa
       console.log(values)
       dispatch(nextStep())

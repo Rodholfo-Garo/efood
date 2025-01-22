@@ -7,8 +7,12 @@ import { formataPreco } from '../PerfilList'
 import Delivery from '../Delivery'
 import Payment from '../Payment'
 import Confirm from '../Confirm'
+import { usePurchaseMutation } from '../../services/api'
 
 const Cart = () => {
+  // api
+  const [purchase, {isLoading, isError, data}] = usePurchaseMutation()
+
   const { isOpen, items, checkout } = useSelector(
     (state: RootReducer) => state.cart
   )
