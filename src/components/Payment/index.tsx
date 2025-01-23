@@ -7,12 +7,22 @@ import { formataPreco } from '../PerfilList'
 import { InputGroup, Row, ButtomContainer } from './styles'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { usePurchaseMutation } from '../../services/api'
 
 const Payment = () => {
   const dispatch = useDispatch()
 
   // Pegar os itens do carrinho no Redux
   const { items } = useSelector((state: RootReducer) => state.cart)
+
+  // Hook para enviar dados para a API
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+
+  // Pega os dados de entrega do estado Global
+  const deliveryData = useSelector(
+    (state: RootReducer) => state.cart.deliveryData
+  )
+
   // Calculando o total do carrinho
   const getTotalPrice = () => {
     return items.reduce(
@@ -60,8 +70,34 @@ const Payment = () => {
     }),
     validateOnMount: false,
     onSubmit: (values) => {
-      console.log(values)
-      dispatch(nextStep()) // Avança para a etapa de pagamento
+      //Combinar os dados de entrega e pagamento
+      const paymentData = {
+        products: items.map((item) => ({
+          id: item.id, // Apenas id e price
+          price: item.preco
+        })),
+        delivery: deliveryData,
+        payment: {
+          card: {
+            name: values.name,
+            number: values.cardNumber,
+            code: Number(values.cvv),
+            expires: {
+              month: Number(values.monthExpiration),
+              year: Number(values.expirationYear)
+            }
+          }
+        }
+      }
+      // Envia para a API
+      purchase(paymentData)
+        .unwrap()
+        .then(() => {
+          dispatch(nextStep()) // Avança para a etapa de confirmação
+        })
+        .catch((error) => {
+          console.error('Erro ao processar pagamento:', error)
+        })
     }
   })
 

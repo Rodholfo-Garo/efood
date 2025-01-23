@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { nextStep, prevStep } from '../../store/reducers/cart'
+import { nextStep, prevStep, saveDeliveryData } from '../../store/reducers/cart'
 import Button from '../Button'
 import { InputGroup, Row, ButtomContainer } from './styles'
 import FormCard from '../FormCard'
@@ -10,9 +10,10 @@ import { usePurchaseMutation } from '../../services/api'
 const Delivery = () => {
   const dispatch = useDispatch()
 
-  // api
+  // Hook da API para realizar a compra
   const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
 
+  // Configuração do Formik para gerenciar o formulário
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -44,20 +45,25 @@ const Delivery = () => {
     // Valida o formulario quando a pagina for carregada
     validateOnMount: false,
     onSubmit: (values) => {
-      purchase({
-        delivery: {
-          receiver: values.fullName,
-          address: {
-            description: values.address,
-            city: values.city,
-            zipCode: values.cep,
-            number: Number(values.houseNumber),
-            complement: values.complement
-          }
+      // Estrutura de dados para enviar à API e ao Redux
+      const deliveryData = {
+        receiver: values.fullName,
+        address: {
+          description: values.address,
+          city: values.city,
+          zipCode: values.cep,
+          number: Number(values.houseNumber),
+          complement: values.complement
         }
-      })
-      // Processa o envio e navega para a próxima etapa
-      console.log(values)
+      }
+
+      // Envia os dados para a API
+      purchase({ delivery: deliveryData })
+
+      // Armazena os dados no Redux
+      dispatch(saveDeliveryData(deliveryData))
+
+      // Avança para a próxima etapa do checkout
       dispatch(nextStep())
     }
   })

@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
 import { Restaurantes } from '../pages/Home'
 import { number } from 'yup'
 
 type Products = {
-  id: 1
-  price: 0
+  id: number // Permite qualquer número, não apenas 1
+  price: number
 }
 
 type PurchasePayload = {
