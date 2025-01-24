@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { Restaurantes } from '../pages/Home'
-import { number } from 'yup'
 
 type Products = {
   id: number // Permite qualquer número, não apenas 1
@@ -41,9 +40,14 @@ const api = createApi({
     getRestaurantes: builder.query<Restaurantes[], void>({
       query: () => 'restaurantes'
     }),
+    // Query é ultilizado para recuperar dados do servidor!
     getPratos: builder.query<Restaurantes, string>({
       query: (id) => `restaurantes/${id}`
     }),
+    // o metodo POST faz a integração da nossa tela com a API
+    // O post serve para inserir novos dados na API
+    // mutation serve para atualizar ou enviar novos dados ao servidor(mudança)
+    // any representa a resposta da API, PurchasePayload é o que vamos enviar para a api
     purchase: builder.mutation<any, PurchasePayload>({
       query: (body) => ({
         url: 'checkout',

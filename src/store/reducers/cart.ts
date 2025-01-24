@@ -6,6 +6,7 @@ type CartState = {
   items: Cardapio[] // Lista de produtos no carrinho
   isOpen: boolean // Define se o carrinho está aberto ou fechado
   checkout: 'cart' | 'delivery' | 'payment' | 'confirm' //Define o fluxo do checkout(tipo de dado union type do ts)
+  orderId: string | null
   // Dados de entrega preenchidos pelo usuário
   deliveryData: {
     receiver: string
@@ -22,6 +23,7 @@ type CartState = {
 // O estado inicial serve para configurar os valores padrão antes de o usuário interagir com o sistema.
 // 2ª - Estado inicial do carrinho
 const initialState: CartState = {
+  orderId: null,
   items: [],
   isOpen: false,
   checkout: 'cart', // Começa na etapa do carrinho
@@ -46,6 +48,10 @@ const cartSlice = createSlice({
 
   // Funções que atualizam o estado global
   reducers: {
+    setOrderId(state, action: PayloadAction<string>) {
+      state.orderId = action.payload // Salva o orderId no Redux
+    },
+
     saveDeliveryData: (state, action) => {
       state.deliveryData = action.payload // Salva os dados de entrega no estado
     },
@@ -82,6 +88,7 @@ export const {
   remove,
   nextStep,
   prevStep,
-  saveDeliveryData
+  saveDeliveryData,
+  setOrderId
 } = cartSlice.actions
 export default cartSlice.reducer

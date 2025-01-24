@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { nextStep, prevStep } from '../../store/reducers/cart'
+import { nextStep, prevStep, setOrderId } from '../../store/reducers/cart'
 import Button from '../Button'
 import FormCard from '../FormCard'
 import { formataPreco } from '../PerfilList'
@@ -92,7 +92,8 @@ const Payment = () => {
       // Envia para a API
       purchase(paymentData)
         .unwrap()
-        .then(() => {
+        .then((response) => {
+          dispatch(setOrderId(response.orderId)) // Salva o orderId no Redux
           dispatch(nextStep()) // Avança para a etapa de confirmação
         })
         .catch((error) => {

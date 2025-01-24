@@ -2,14 +2,23 @@ import Button from '../Button'
 import FormCard from '../FormCard'
 import { ConfirmText } from './styles'
 
-import { useDispatch } from 'react-redux'
-import { nextStep, prevStep } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import { prevStep } from '../../store/reducers/cart'
+import { usePurchaseMutation } from '../../services/api'
 
 const Confirm = () => {
   const dispatch = useDispatch()
+  const [purchase, { isError, isSuccess, data, isLoading }] =
+    usePurchaseMutation()
+
+  const { orderId } = useSelector((state: RootReducer) => state.cart)
+
+  // Verifica se o pedido foi concluído com sucesso e se temos dados para exibir
+
   return (
     <>
-      <FormCard title="Pedido realizado - {ORDER_ID}">
+      <FormCard title={`Pedido realizado - ${orderId || 'Processando...'}`}>
         <ConfirmText>
           <p>
             Estamos felizes em informar que seu pedido já está em processo de
