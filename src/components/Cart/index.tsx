@@ -1,18 +1,16 @@
 import Button from '../Button'
-import { Overlay, CartContainer, SideBar, Prices, CartItem } from './styles'
-import { RootReducer } from '../../store'
-import { useDispatch, useSelector } from 'react-redux'
-import { close, remove, nextStep } from '../../store/reducers/cart'
-import { formataPreco } from '../PerfilList'
 import Delivery from '../Delivery'
 import Payment from '../Payment'
 import Confirm from '../Confirm'
-import { usePurchaseMutation } from '../../services/api'
+
+import { RootReducer } from '../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import { close, remove, nextStep } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
+
+import * as S from './styles'
 
 const Cart = () => {
-  // api
-  const [purchase, {isLoading, isError, data}] = usePurchaseMutation()
-
   const { isOpen, items, checkout } = useSelector(
     (state: RootReducer) => state.cart
   )
@@ -33,26 +31,26 @@ const Cart = () => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <SideBar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.SideBar>
         {checkout === 'cart' && (
           <>
             <ul>
               {items.map((item) => (
-                <CartItem key={item.id}>
+                <S.CartItem key={item.id}>
                   <img src={item.foto} alt={item.nome} />
                   <div>
                     <h3>{item.nome}</h3>
-                    <span>{formataPreco(item.preco)}</span>
+                    <span>{parseToBrl(item.preco)}</span>
                   </div>
                   <button onClick={() => removeItem(item.id)} type="button" />
-                </CartItem>
+                </S.CartItem>
               ))}
             </ul>
-            <Prices>
-              Valor Total <span>{formataPreco(getTotalPrice())}</span>
-            </Prices>
+            <S.Prices>
+              Valor Total <span>{parseToBrl(getTotalPrice())}</span>
+            </S.Prices>
             <Button
               onClick={() => dispatch(nextStep())}
               title="Cliqe aqui para compra"
@@ -65,8 +63,8 @@ const Cart = () => {
         {checkout === 'delivery' && <Delivery />}
         {checkout === 'payment' && <Payment />}
         {checkout === 'confirm' && <Confirm />}
-      </SideBar>
-    </CartContainer>
+      </S.SideBar>
+    </S.CartContainer>
   )
 }
 

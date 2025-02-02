@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Container = styled.section`
-  color: ${cores.textoBotao};
+  color: ${colors.PeachCream};
 
   h2 {
     font-size: 16px;

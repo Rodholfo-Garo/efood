@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Card = styled.div`
   position: relative;
   padding: 8px;
-  background-color: ${cores.larajaEscuro};
+  background-color: ${colors.BlushPink};
 
   img {
     display: block;
@@ -16,13 +16,13 @@ export const Card = styled.div`
 `
 
 export const Content = styled.div`
-  border: 1px solid ${cores.larajaEscuro};
+  border: 1px solid ${colors.BlushPink};
   display: block;
-  color: ${cores.textoBotao};
+  color: ${colors.PeachCream};
 
   ${ButtonContainer} {
-    background-color: ${cores.textoBotao};
-    color: ${cores.larajaEscuro};
+    background-color: ${colors.PeachCream};
+    color: ${colors.BlushPink};
     display: block;
     width: 100%;
   }
@@ -32,7 +32,7 @@ export const Title = styled.h3`
   font-size: 18px;
   font-weight: 700;
 `
-export const Descricao = styled.div`
+export const Description = styled.div`
   display: block;
   padding: 8px 0;
   font-weight: 400;

@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
-import { nextStep, prevStep, setOrderId } from '../../store/reducers/cart'
+import * as Yup from 'yup'
+import { useFormik } from 'formik'
+
 import Button from '../Button'
 import FormCard from '../FormCard'
-import { formataPreco } from '../PerfilList'
-import { InputGroup, Row, ButtomContainer } from './styles'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
+
+import { RootReducer } from '../../store'
+import { nextStep, prevStep, setOrderId } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
 import { usePurchaseMutation } from '../../services/api'
+import * as S from './styles'
 
 const Payment = () => {
   const dispatch = useDispatch()
@@ -107,10 +109,10 @@ const Payment = () => {
   return (
     <>
       <FormCard
-        title={`Pagamento - Valor a pagar de ${formataPreco(getTotalPrice())}`}
+        title={`Pagamento - Valor a pagar de ${parseToBrl(getTotalPrice())}`}
       >
         <form onSubmit={form.handleSubmit}>
-          <InputGroup>
+          <S.InputGroup>
             <label htmlFor="name">Nome no cartão</label>
             <input
               id="name"
@@ -122,9 +124,9 @@ const Payment = () => {
               onBlur={form.handleBlur}
             />
             <small>{getErrorMessage('name', form.errors.name)}</small>
-          </InputGroup>
-          <Row>
-            <InputGroup maxWidth="80%">
+          </S.InputGroup>
+          <S.Row>
+            <S.InputGroup maxWidth="80%">
               <label htmlFor="cardNumber">Número do cartão</label>
               <input
                 id="cardNumber"
@@ -138,8 +140,8 @@ const Payment = () => {
               <small>
                 {getErrorMessage('cardNumber', form.errors.cardNumber)}
               </small>
-            </InputGroup>
-            <InputGroup maxWidth="20%">
+            </S.InputGroup>
+            <S.InputGroup maxWidth="20%">
               <label htmlFor="cvv">CVV</label>
               <input
                 id="cvv"
@@ -151,10 +153,10 @@ const Payment = () => {
                 onBlur={form.handleBlur}
               />
               <small>{getErrorMessage('cvv', form.errors.cvv)}</small>
-            </InputGroup>
-          </Row>
-          <Row>
-            <InputGroup>
+            </S.InputGroup>
+          </S.Row>
+          <S.Row>
+            <S.InputGroup>
               <label htmlFor="monthExpiration">Mês do vencimento</label>
               <input
                 id="monthExpiration"
@@ -171,8 +173,8 @@ const Payment = () => {
                   form.errors.monthExpiration
                 )}
               </small>
-            </InputGroup>
-            <InputGroup>
+            </S.InputGroup>
+            <S.InputGroup>
               <label htmlFor="expirationYear">Ano de vencimento</label>
               <input
                 id="expirationYear"
@@ -186,9 +188,9 @@ const Payment = () => {
               <small>
                 {getErrorMessage('expirationYear', form.errors.expirationYear)}
               </small>
-            </InputGroup>
-          </Row>
-          <ButtomContainer>
+            </S.InputGroup>
+          </S.Row>
+          <S.ButtomContainer>
             <Button
               onClick={() => {
                 form.setTouched({
@@ -219,7 +221,7 @@ const Payment = () => {
             >
               Voltar para a edição de endereço
             </Button>
-          </ButtomContainer>
+          </S.ButtomContainer>
         </form>
       </FormCard>
     </>

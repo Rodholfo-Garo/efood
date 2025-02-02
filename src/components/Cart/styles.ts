@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 import lixo from '../../assets/images/lixeira-de-reciclagem 1.png'
 
@@ -31,15 +31,15 @@ export const CartContainer = styled.div`
 
 export const SideBar = styled.aside`
   width: 360px;
-  background-color: ${cores.larajaEscuro};
+  background-color: ${colors.BlushPink};
   z-index: 1;
   padding: 32px 8px 0 8px;
 
   ${ButtonContainer} {
     max-width: 100%;
     width: 100%;
-    background-color: ${cores.textoBotao};
-    color: ${cores.larajaEscuro};
+    background-color: ${colors.PeachCream};
+    color: ${colors.BlushPink};
   }
 `
 
@@ -47,7 +47,7 @@ export const Prices = styled.p`
   width: 100%;
   font-size: 14px;
   font-weight: 700;
-  color: ${cores.textoBotao};
+  color: ${colors.PeachCream};
   display: flex;
   justify-content: space-between;
   line-height: 16.41px;
@@ -55,7 +55,7 @@ export const Prices = styled.p`
 `
 export const CartItem = styled.li`
   display: flex;
-  background-color: ${cores.textoBotao};
+  background-color: ${colors.PeachCream};
   padding: 8px 8px 12px 8px;
   margin-bottom: 16px;
   position: relative;

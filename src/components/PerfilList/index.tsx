@@ -1,32 +1,19 @@
-import PerfilProducts from '../PerfilProducts'
-import {
-  Items,
-  Item,
-  Container,
-  Modal,
-  ModalContent,
-  BtnFechar,
-  ModalContentFoto,
-  ModalContentTexto,
-  ModalAberto
-} from './styles'
-import fechar from '../../assets/images/close 1.png'
-import { useState } from 'react'
-import { Cardapio, Restaurantes } from '../../pages/Home'
-import Button from '../Button'
 import { useDispatch } from 'react-redux'
+
+import PerfilProducts from '../PerfilProducts'
+import Button from '../Button'
+import { Cardapio, Restaurantes } from '../../pages/Home'
+import { useState } from 'react'
 import { open, add } from '../../store/reducers/cart'
+
+import close from '../../assets/images/close 1.png'
+import * as S from './styles'
+import { parseToBrl } from '../../utils'
 
 export type Props = {
   pratos: Restaurantes[]
 }
 
-export const formataPreco = (preco: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
 export const PerfilList = ({ pratos }: Props) => {
   const dispatch = useDispatch()
 
@@ -37,53 +24,53 @@ export const PerfilList = ({ pratos }: Props) => {
     dispatch(open()) // Abre o carrinho
   }
 
-  const [modalEstaAberto, setModalEstaAberto] = useState(false) // Estado para controlar a visibilidade do modal
+  const [modalIsOpen, setModalIsOpen] = useState(false) // Estado para controlar a visibilidade do modal
   const [itemSelecionado, setItemSelecionado] = useState<
     Restaurantes['cardapio'][0] | null
   >(null) // Estado para armazenar o item selecionado
 
   //função abrirModal para definir o item selecionado e abrir o modal.
-  const abrirModal = (item: Restaurantes['cardapio'][0]) => {
+  const openModal = (item: Restaurantes['cardapio'][0]) => {
     setItemSelecionado(item) // Atualiza o estado com o item selecionado
-    setModalEstaAberto(true) // Abre o modal
+    setModalIsOpen(true) // Abre o modal
   }
 
   return (
     <>
       <div className="container">
-        <Container>
-          <Items>
+        <S.Container>
+          <S.Items>
             {pratos.map((prato) =>
               // Mapeia os itens do cardápio de cada prato
               prato.cardapio.map((item) => (
-                <Item key={item.id}>
+                <S.Item key={item.id}>
                   <PerfilProducts
                     id={item.id}
                     image={item.foto}
                     description={item.descricao}
                     title={item.nome}
-                    abrirModal={() => abrirModal(item)} // Passa a função para abrir o modal com o item selecionado
+                    openModal={() => openModal(item)} // Passa a função para abrir o modal com o item selecionado
                   />
-                </Item>
+                </S.Item>
               ))
             )}
-          </Items>
-        </Container>
-        <Modal className={modalEstaAberto ? 'visivel' : ''}>
-          <ModalContent className="container">
-            <BtnFechar>
+          </S.Items>
+        </S.Container>
+        <S.Modal className={modalIsOpen ? 'is-visible' : ''}>
+          <S.ModalContent className="container">
+            <S.CloseBtn>
               <img
-                src={fechar}
+                src={close}
                 alt="Icone Fechar"
-                onClick={() => setModalEstaAberto(false)} // Fecha o modal ao clicar na imagem
+                onClick={() => setModalIsOpen(false)} // Fecha o modal ao clicar na imagem
               />
-            </BtnFechar>
+            </S.CloseBtn>
             {itemSelecionado && (
-              <ModalAberto>
-                <ModalContentFoto>
+              <S.ModalAberto>
+                <S.ModalContentFoto>
                   <img src={itemSelecionado.foto} alt={itemSelecionado.nome} />
-                </ModalContentFoto>
-                <ModalContentTexto>
+                </S.ModalContentFoto>
+                <S.ModalContentTexto>
                   <h3>{itemSelecionado.nome}</h3>
                   <p>{itemSelecionado.descricao}</p>
                   <p>{itemSelecionado.porcao}</p>
@@ -91,25 +78,25 @@ export const PerfilList = ({ pratos }: Props) => {
                     onClick={() => {
                       if (itemSelecionado) {
                         addToCart(itemSelecionado) // Adiciona o item ao carrinho
-                        setModalEstaAberto(false) // Fecha o modal após adicionar ao carrinho
+                        setModalIsOpen(false) // Fecha o modal após adicionar ao carrinho
                       }
                     }}
                     type="button"
                     title="Comprar"
                   >
-                    {`Adicionar ao carrinho - ${formataPreco(
+                    {`Adicionar ao carrinho - ${parseToBrl(
                       itemSelecionado.preco
                     )}`}
                   </Button>
-                </ModalContentTexto>
-              </ModalAberto>
+                </S.ModalContentTexto>
+              </S.ModalAberto>
             )}
-          </ModalContent>
+          </S.ModalContent>
           <div
             className="overlay"
-            onClick={() => setModalEstaAberto(false)} // Fecha o modal ao clicar na sobreposição
+            onClick={() => setModalIsOpen(false)} // Fecha o modal ao clicar na sobreposição
           ></div>
-        </Modal>
+        </S.Modal>
       </div>
     </>
   )

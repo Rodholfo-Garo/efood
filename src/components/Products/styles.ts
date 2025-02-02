@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { TagContainer } from '../Tag/styles'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Card = styled.div`
   margin-bottom: 40px;
@@ -21,10 +22,10 @@ export const Card = styled.div`
 export const Content = styled.div`
   margin-top: -6px;
   padding: 8px 8px 10px 8px;
-  border: 1px solid ${cores.corFundo};
+  border: 1px solid ${colors.CreamyWhite};
   background-color: #fff;
   display: block;
-  border: 1px solid ${cores.larajaEscuro};
+  border: 1px solid ${colors.BlushPink};
 `
 
 export const Avaliacao = styled.div`

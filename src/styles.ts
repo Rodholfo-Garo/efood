@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
-//Cores do Projeto
+//colors do Projeto
 
-export const cores = {
-  larajaEscuro: '#E66767',
-  corFundo: '#FFF8F2',
-  textoBotao: '#FFEBD9'
+export const colors = {
+  BlushPink: '#E66767',
+  CreamyWhite: '#FFF8F2',
+  PeachCream: '#FFEBD9'
 }
 
 export const breakpoints = {
@@ -26,8 +26,8 @@ export const GlobalCss = createGlobalStyle`
 }
 
 body{
-  background-color:${cores.corFundo};
-  color:${cores.larajaEscuro};
+  background-color:${colors.CreamyWhite};
+  color:${colors.BlushPink};
 }
 .container{
   max-width: 1024px;

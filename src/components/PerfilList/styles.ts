@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Container = styled.section`
@@ -21,7 +21,7 @@ export const Item = styled.li`
 `
 
 export const Modal = styled.div`
-  color: ${cores.textoBotao};
+  color: ${colors.PeachCream};
   position: fixed;
   top: 0;
   left: 0;
@@ -32,7 +32,7 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  &.visivel {
+  &.is-visible {
     display: flex;
     @media (max-width: ${breakpoints.tablet}) {
       display: grid;
@@ -52,7 +52,7 @@ export const Modal = styled.div`
 
 export const ModalContent = styled.div`
   padding: 32px;
-  background-color: ${cores.larajaEscuro};
+  background-color: ${colors.BlushPink};
   position: relative; // Corrigido de "postion" para "position"
   z-index: 1;
 `
@@ -60,8 +60,8 @@ export const ModalAberto = styled.div`
   display: flex;
 
   ${ButtonContainer} {
-    background-color: ${cores.textoBotao};
-    color: ${cores.larajaEscuro};
+    background-color: ${colors.PeachCream};
+    color: ${colors.BlushPink};
     display: block;
     width: 218px;
   }
@@ -95,7 +95,7 @@ export const ModalContentTexto = styled.div`
   }
 `
 
-export const BtnFechar = styled.div`
+export const CloseBtn = styled.div`
   position: absolute; // Posiciona o botão à direita
   top: 8px; // Margem de 8px no topo
   right: 8px; // Margem de 8px na direita

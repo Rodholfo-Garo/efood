@@ -1,39 +1,39 @@
-import { Card, Title, Descricao, Content } from './styles'
 import Button from '../Button'
+import * as S from './styles'
 
 type Props = {
   id: number
   title: string
   description: string
   image: string
-  abrirModal?: () => void
+  openModal?: () => void
 }
 
 export const PerfilProduct = ({
   description,
   title,
   image,
-  abrirModal
+  openModal
 }: Props) => {
-  const getDescricao = (descricao: string) => {
-    if (descricao.length > 150) {
-      return descricao.slice(0, 164) + '...'
+  const getDescription = (description: string) => {
+    if (description.length > 150) {
+      return description.slice(0, 164) + '...'
     }
-    return descricao
+    return description
   }
   return (
     <>
       <div className="container">
-        <Card>
+        <S.Card>
           <img src={image} alt={title} />
-          <Content>
-            <Title>{title}</Title>
-            <Descricao>{getDescricao(description)}</Descricao>
-            <Button type="button" title="Comprar" onClick={abrirModal}>
+          <S.Content>
+            <S.Title>{title}</S.Title>
+            <S.Description>{getDescription(description)}</S.Description>
+            <Button type="button" title="Comprar" onClick={openModal}>
               Mais detalhes
             </Button>
-          </Content>
-        </Card>
+          </S.Content>
+        </S.Card>
       </div>
     </>
   )

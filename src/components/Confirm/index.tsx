@@ -1,11 +1,12 @@
+import { useDispatch, useSelector } from 'react-redux'
+
 import Button from '../Button'
 import FormCard from '../FormCard'
-import { ConfirmText } from './styles'
-
 import { RootReducer } from '../../store'
-import { useDispatch, useSelector } from 'react-redux'
 import { prevStep } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
+
+import { ConfirmText } from './styles'
 
 const Confirm = () => {
   const dispatch = useDispatch()

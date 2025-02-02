@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Header = styled.header`
   width: 100%;
@@ -8,7 +8,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: center; /* Centraliza o conteúdo horizontalmente */
   align-items: center; /* Centraliza o conteúdo verticalmente */
-  background-color: ${cores.larajaEscuro}; /* Ajuste conforme o tema */
+  background-color: ${colors.BlushPink}; /* Ajuste conforme o tema */
   text-decoration: none;
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -110,7 +110,7 @@ export const HomeLink = styled(Link)`
   align-items: center; /* Alinha centralmente com a imagem */
 
   &:visited {
-    color: ${cores.larajaEscuro};
+    color: ${colors.BlushPink};
   }
 `
 
@@ -138,7 +138,7 @@ export const Hamburguer = styled.div`
     height: 2px;
     display: block;
     width: 100%;
-    background-color: ${cores.larajaEscuro};
+    background-color: ${colors.BlushPink};
     margin-bottom: 4px;
   }
 

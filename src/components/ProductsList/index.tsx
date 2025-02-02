@@ -1,6 +1,6 @@
 import { Restaurantes } from '../../pages/Home'
 import Product from '../Products'
-import { Lista, Container } from './styles'
+import * as S from './styles'
 
 export type Props = {
   pratos: Restaurantes[]
@@ -23,8 +23,8 @@ export const ProductList = ({ pratos }: Props) => {
   return (
     <>
       <div className="container">
-        <Container>
-          <Lista>
+        <S.Container>
+          <S.Lista>
             {pratos.map((prato) => (
               <Product
                 key={prato.id}
@@ -36,8 +36,8 @@ export const ProductList = ({ pratos }: Props) => {
                 title={prato.titulo}
               />
             ))}
-          </Lista>
-        </Container>
+          </S.Lista>
+        </S.Container>
       </div>
     </>
   )

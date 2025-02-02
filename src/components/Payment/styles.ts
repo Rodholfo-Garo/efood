@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 type InputProps = {
@@ -29,15 +29,15 @@ export const InputGroup = styled.div<InputProps>`
     width: 100%;
     padding: 8px;
     height: 32px;
-    background-color: ${cores.textoBotao};
-    border: 1px solid ${cores.textoBotao};
+    background-color: ${colors.PeachCream};
+    border: 1px solid ${colors.PeachCream};
   }
   textarea {
     resize: none; /* Impede o redimensionamento */
     height: 60px;
     width: 100%;
-    background-color: ${cores.textoBotao};
-    border: 1px solid ${cores.textoBotao};
+    background-color: ${colors.PeachCream};
+    border: 1px solid ${colors.PeachCream};
   }
 `
 

@@ -1,9 +1,9 @@
+import { useParams } from 'react-router-dom'
+
 import PerfilBanner from '../../components/PerfilBanner'
 import PerfilList from '../../components/PerfilList'
-import Footer from '../../components/Footer'
-import { useParams } from 'react-router-dom'
-import { useGetPratosQuery } from '../../services/api'
 import Cart from '../../components/Cart'
+import { useGetPratosQuery } from '../../services/api'
 
 const Perfil = () => {
   const { id } = useParams() // Obtém o ID da URL

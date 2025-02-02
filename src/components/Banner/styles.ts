@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { breakpoints } from '../../styles'
 
-export const Imagem = styled.div`
+export const Image = styled.div`
   width: 100%;
   height: 380px;
   padding: 64px 0 40px;

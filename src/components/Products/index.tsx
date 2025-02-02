@@ -1,15 +1,7 @@
-import {
-  Card,
-  Title,
-  Descricao,
-  Avaliacao,
-  Nota,
-  Content,
-  Infos
-} from './styles'
-import star from '../../assets/images/estrela.png'
 import Button from '../Button'
 import Tag from '../Tag'
+import star from '../../assets/images/estrela.png'
+import * as S from './styles'
 
 // Como cada Card pode ter informações diferentes, trabalhamos com um array de strings e apartir dele fazemos a renderização das tags, cada tag renderiza um item do array.
 
@@ -42,20 +34,23 @@ export const Product = ({
   return (
     <>
       <div className="container">
-        <Card>
+        <S.Card
+        // to={`/perfil/${id}`}
+        // title={`Clique aqui para conhecer o Restaurante ${title}`}
+        >
           <img src={image} alt={title} />
-          <Infos>
+          <S.Infos>
             {infos && infos.map((info) => <Tag key={info}>{info}</Tag>)}
-          </Infos>
-          <Content>
-            <Avaliacao>
-              <Title>{title}</Title>
-              <Nota>
+          </S.Infos>
+          <S.Content>
+            <S.Avaliacao>
+              <S.Title>{title}</S.Title>
+              <S.Nota>
                 <span>{note}</span>
                 <img src={star} alt="" />
-              </Nota>
-            </Avaliacao>
-            <Descricao>{getDescricao(description)}</Descricao>
+              </S.Nota>
+            </S.Avaliacao>
+            <S.Descricao>{getDescricao(description)}</S.Descricao>
             <Button
               type="link"
               to={`/perfil/${id}`}
@@ -63,8 +58,8 @@ export const Product = ({
             >
               Saiba Mais
             </Button>
-          </Content>
-        </Card>
+          </S.Content>
+        </S.Card>
       </div>
     </>
   )

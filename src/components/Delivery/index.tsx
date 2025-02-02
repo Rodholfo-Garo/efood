@@ -1,11 +1,13 @@
-import { useDispatch } from 'react-redux'
-import { nextStep, prevStep, saveDeliveryData } from '../../store/reducers/cart'
-import Button from '../Button'
-import { InputGroup, Row, ButtomContainer } from './styles'
-import FormCard from '../FormCard'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
+
+import Button from '../Button'
+import FormCard from '../FormCard'
+import { nextStep, prevStep, saveDeliveryData } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
+
+import * as S from './styles'
 
 const Delivery = () => {
   const dispatch = useDispatch()
@@ -82,7 +84,7 @@ const Delivery = () => {
     <FormCard title="Entrega">
       {/* handleSubmit é um método do Formik */}
       <form onSubmit={form.handleSubmit}>
-        <InputGroup>
+        <S.InputGroup>
           <label htmlFor="fullName">Quem irá receber</label>
           <input
             id="fullName"
@@ -97,9 +99,9 @@ const Delivery = () => {
             onBlur={form.handleBlur}
           />
           <small>{getErrorMessage('fullName', form.errors.fullName)}</small>
-        </InputGroup>
+        </S.InputGroup>
 
-        <InputGroup>
+        <S.InputGroup>
           <label htmlFor="address">Endereço</label>
           <input
             id="address"
@@ -111,9 +113,9 @@ const Delivery = () => {
             onBlur={form.handleBlur}
           />
           <small>{getErrorMessage('address', form.errors.address)}</small>
-        </InputGroup>
+        </S.InputGroup>
 
-        <InputGroup>
+        <S.InputGroup>
           <label htmlFor="city">Cidade</label>
           <input
             id="city"
@@ -125,10 +127,10 @@ const Delivery = () => {
             onBlur={form.handleBlur}
           />
           <small>{getErrorMessage('city', form.errors.city)}</small>
-        </InputGroup>
+        </S.InputGroup>
 
-        <Row>
-          <InputGroup>
+        <S.Row>
+          <S.InputGroup>
             <label htmlFor="cep">CEP</label>
             <input
               id="cep"
@@ -140,8 +142,8 @@ const Delivery = () => {
               onBlur={form.handleBlur}
             />
             <small>{getErrorMessage('cep', form.errors.cep)}</small>
-          </InputGroup>
-          <InputGroup>
+          </S.InputGroup>
+          <S.InputGroup>
             <label htmlFor="houseNumber">Número</label>
             <input
               id="houseNumber"
@@ -155,10 +157,10 @@ const Delivery = () => {
             <small>
               {getErrorMessage('houseNumber', form.errors.houseNumber)}
             </small>
-          </InputGroup>
-        </Row>
+          </S.InputGroup>
+        </S.Row>
 
-        <InputGroup>
+        <S.InputGroup>
           <label htmlFor="complement">Complemento (opcional)</label>
           <textarea
             id="complement"
@@ -169,9 +171,9 @@ const Delivery = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
-        </InputGroup>
+        </S.InputGroup>
 
-        <ButtomContainer>
+        <S.ButtomContainer>
           <Button
             onClick={() => {
               // Faz a validação dos campos ao clicar no botão
@@ -204,7 +206,7 @@ const Delivery = () => {
           >
             Voltar para o carrinho
           </Button>
-        </ButtomContainer>
+        </S.ButtomContainer>
       </form>
     </FormCard>
   )

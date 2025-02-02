@@ -1,23 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import { Restaurantes } from '../../pages/Home'
+import { RootReducer } from '../../store'
+import { open } from '../../store/reducers/cart'
+
 import vetor from '../../assets/images/vetor.png'
 import logo from '../../assets/images/logo.png'
 import fundoPerfil from '../../assets/images/imagem_de_fundo.png'
-import {
-  Header,
-  Apresentacao,
-  HomeLink,
-  Hamburguer,
-  Links,
-  LinkItem,
-  MenuWrapper,
-  NavMobile
-} from './styles'
-import { Link } from 'react-router-dom'
-import { Restaurantes } from '../../pages/Home'
-
-import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
-import { RootReducer } from '../../store'
+import * as S from './styles'
 
 export type Props = {
   prato: Restaurantes
@@ -37,62 +29,73 @@ export const PerfilBanner = ({ prato }: Props) => {
   }
   return (
     <>
-      <Header style={{ backgroundImage: `url(${vetor})` }}>
+      <S.Header style={{ backgroundImage: `url(${vetor})` }}>
         <div className="container">
-          <MenuWrapper
+          <S.MenuWrapper
             onClick={() => {
               setIsMenuOpen(!isMenuOpen)
             }}
           >
-            <Hamburguer>
+            <S.Hamburguer>
               <span />
               <span />
               <span />
-            </Hamburguer>
+            </S.Hamburguer>
             <h4 onClick={openCart}>
               <span>{items.length}</span> produto(s)
             </h4>
-          </MenuWrapper>
+          </S.MenuWrapper>
 
           <nav>
-            <Links>
-              <LinkItem style={{ flex: 1 }}>
+            <S.Links>
+              <S.LinkItem style={{ flex: 1 }}>
                 {/* Item à esquerda */}
-                <HomeLink to="/">Restaurantes</HomeLink>
-              </LinkItem>
+                <S.HomeLink
+                  title="Clique aqui para conhecer nossos restaurantes"
+                  to="/"
+                >
+                  Restaurantes
+                </S.HomeLink>
+              </S.LinkItem>
 
-              <LinkItem style={{ flex: 0 }}>
+              <S.LinkItem style={{ flex: 0 }}>
                 {/* Item central */}
-                <Link to="/">
+                <Link title="Nosso Logo" to="/">
                   <img src={logo} alt="Logo" />
                 </Link>
-              </LinkItem>
+              </S.LinkItem>
 
-              <LinkItem style={{ flex: 1, justifyContent: 'flex-end' }}>
+              <S.LinkItem style={{ flex: 1, justifyContent: 'flex-end' }}>
                 {/* Item à direita */}
                 <h4 onClick={openCart}>
                   <span>{items.length}</span> produto(s) no carrinho
                 </h4>
-              </LinkItem>
-            </Links>
+              </S.LinkItem>
+            </S.Links>
           </nav>
-          <NavMobile className={isMenuOpen ? 'is-open' : ''}>
-            <Links>
-              <LinkItem style={{ flex: 1 }}>
+          <S.NavMobile className={isMenuOpen ? 'is-open' : ''}>
+            <S.Links>
+              <S.LinkItem style={{ flex: 1 }}>
                 {/* Item à esquerda */}
-                <HomeLink to="/">Restaurantes</HomeLink>
-              </LinkItem>
-            </Links>
-          </NavMobile>
+                <S.HomeLink
+                  title="Clique aqui para conhecer nossos restaurantes"
+                  to="/"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Restaurantes
+                </S.HomeLink>
+              </S.LinkItem>
+            </S.Links>
+          </S.NavMobile>
         </div>
-      </Header>
+      </S.Header>
 
-      <Apresentacao style={{ backgroundImage: `url(${fundoPerfil})` }}>
+      <S.Apresentacao style={{ backgroundImage: `url(${fundoPerfil})` }}>
         <div className="container">
           <h2>{prato.tipo}</h2>
           <h1>{prato.titulo}</h1>
         </div>
-      </Apresentacao>
+      </S.Apresentacao>
     </>
   )
 }
