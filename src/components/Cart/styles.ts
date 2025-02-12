@@ -35,6 +35,10 @@ export const SideBar = styled.aside`
   z-index: 1;
   padding: 32px 8px 0 8px;
 
+  p {
+    color: ${colors.PeachCream};
+  }
+
   ${ButtonContainer} {
     max-width: 100%;
     width: 100%;

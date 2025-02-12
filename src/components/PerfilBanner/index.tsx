@@ -27,6 +27,7 @@ export const PerfilBanner = ({ prato }: Props) => {
   const openCart = () => {
     dispatch(open())
   }
+
   return (
     <>
       <S.Header style={{ backgroundImage: `url(${vetor})` }}>

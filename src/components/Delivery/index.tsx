@@ -72,12 +72,24 @@ const Delivery = () => {
 
   console.log(form)
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
-    const isTouched = fieldName in form.touched
-    const isInvalid = fieldName in form.errors
+  // const getErrorMessage = (fieldName: string, message?: string) => {
+  //   const isTouched = fieldName in form.touched
+  //   const isInvalid = fieldName in form.errors
 
-    if (isTouched && isInvalid) return message
-    return ''
+  //   if (isTouched && isInvalid) return message
+  //   return ''
+  // }
+
+  const checkInputHasError = (fieldName: string) => {
+    // Verifica se o Campo Foi manipulado
+    const isTouched = fieldName in form.touched
+
+    // Verifica se o campo esta em errors
+    const isInvalid = fieldName in form.errors
+    // Esta expressão retorna um booleano, por isso pode ser passada como um valor para const
+    const hasError = isTouched && isInvalid
+
+    return hasError
   }
 
   return (
@@ -97,8 +109,9 @@ const Delivery = () => {
             onChange={form.handleChange}
             // Marca o campo como tocado e dispara a validação
             onBlur={form.handleBlur}
+            // Se retornar verdadeiro temos uma classe error, caso contrario, retorna um string vazia
+            className={checkInputHasError('fullName') ? 'error' : ''}
           />
-          <small>{getErrorMessage('fullName', form.errors.fullName)}</small>
         </S.InputGroup>
 
         <S.InputGroup>
@@ -111,8 +124,8 @@ const Delivery = () => {
             value={form.values.address}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            className={checkInputHasError('address') ? 'error' : ''}
           />
-          <small>{getErrorMessage('address', form.errors.address)}</small>
         </S.InputGroup>
 
         <S.InputGroup>
@@ -125,8 +138,8 @@ const Delivery = () => {
             value={form.values.city}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            className={checkInputHasError('city') ? 'error' : ''}
           />
-          <small>{getErrorMessage('city', form.errors.city)}</small>
         </S.InputGroup>
 
         <S.Row>
@@ -140,8 +153,8 @@ const Delivery = () => {
               value={form.values.cep}
               onChange={form.handleChange}
               onBlur={form.handleBlur}
+              className={checkInputHasError('cep') ? 'error' : ''}
             />
-            <small>{getErrorMessage('cep', form.errors.cep)}</small>
           </S.InputGroup>
           <S.InputGroup>
             <label htmlFor="houseNumber">Número</label>
@@ -153,10 +166,8 @@ const Delivery = () => {
               value={form.values.houseNumber}
               onChange={form.handleChange}
               onBlur={form.handleBlur}
+              className={checkInputHasError('houseNumber') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage('houseNumber', form.errors.houseNumber)}
-            </small>
           </S.InputGroup>
         </S.Row>
 
