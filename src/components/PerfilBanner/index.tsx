@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Restaurantes } from '../../pages/Home'
 import { RootReducer } from '../../store'
 import { open } from '../../store/reducers/cart'
 
@@ -10,12 +9,14 @@ import vetor from '../../assets/images/vetor.png'
 import logo from '../../assets/images/logo.png'
 import fundoPerfil from '../../assets/images/imagem_de_fundo.png'
 import * as S from './styles'
+import Loader from '../Loader'
 
 export type Props = {
   prato: Restaurantes
+  isLoading?: boolean
 }
 
-export const PerfilBanner = ({ prato }: Props) => {
+export const PerfilBanner = ({ prato, isLoading }: Props) => {
   const dispatch = useDispatch()
 
   // Conta os Item ao carrinho
@@ -28,6 +29,9 @@ export const PerfilBanner = ({ prato }: Props) => {
     dispatch(open())
   }
 
+  if (isLoading) {
+    return <Loader />
+  }
   return (
     <>
       <S.Header style={{ backgroundImage: `url(${vetor})` }}>

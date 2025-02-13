@@ -1,12 +1,13 @@
-import { Restaurantes } from '../../pages/Home'
+import Loader from '../Loader'
 import Product from '../Products'
 import * as S from './styles'
 
 export type Props = {
   pratos: Restaurantes[]
+  isLoading?: boolean
 }
 
-export const ProductList = ({ pratos }: Props) => {
+export const ProductList = ({ pratos, isLoading }: Props) => {
   const getPratosTag = (prato: Restaurantes) => {
     const tags = []
 
@@ -18,6 +19,10 @@ export const ProductList = ({ pratos }: Props) => {
       tags.push('Destaque da Semana')
     }
     return tags
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (

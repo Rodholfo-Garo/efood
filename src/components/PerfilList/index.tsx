@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux'
 
 import PerfilProducts from '../PerfilProducts'
+import Loader from '../Loader'
 import Button from '../Button'
-import { Cardapio, Restaurantes } from '../../pages/Home'
+
 import { useState } from 'react'
 import { open, add } from '../../store/reducers/cart'
 
@@ -12,9 +13,10 @@ import { parseToBrl } from '../../utils'
 
 export type Props = {
   pratos: Restaurantes[]
+  isLoading?: boolean
 }
 
-export const PerfilList = ({ pratos }: Props) => {
+export const PerfilList = ({ pratos, isLoading }: Props) => {
   const dispatch = useDispatch()
 
   // Função para adicionar o item selecionado ao carrinho
@@ -33,6 +35,9 @@ export const PerfilList = ({ pratos }: Props) => {
   const openModal = (item: Restaurantes['cardapio'][0]) => {
     setItemSelecionado(item) // Atualiza o estado com o item selecionado
     setModalIsOpen(true) // Abre o modal
+  }
+  if (isLoading) {
+    return <Loader />
   }
 
   return (

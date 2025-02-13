@@ -33,12 +33,20 @@ const Payment = () => {
     )
   }
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  // const getErrorMessage = (fieldName: string, message?: string) => {
+  //   const isTouched = fieldName in form.touched
+  //   const isInvalid = fieldName in form.errors
+
+  //   if (isTouched && isInvalid) return message
+  //   return ''
+  // }
+
+  const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
 
-    if (isTouched && isInvalid) return message
-    return ''
+    return hasError
   }
 
   const form = useFormik({
@@ -122,8 +130,8 @@ const Payment = () => {
               value={form.values.name}
               onChange={form.handleChange}
               onBlur={form.handleBlur}
+              className={checkInputHasError('name') ? 'error' : ''}
             />
-            <small>{getErrorMessage('name', form.errors.name)}</small>
           </S.InputGroup>
           <S.Row>
             <S.InputGroup maxWidth="80%">
@@ -136,10 +144,8 @@ const Payment = () => {
                 value={form.values.cardNumber}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('cardNumber') ? 'error' : ''}
               />
-              <small>
-                {getErrorMessage('cardNumber', form.errors.cardNumber)}
-              </small>
             </S.InputGroup>
             <S.InputGroup maxWidth="20%">
               <label htmlFor="cvv">CVV</label>
@@ -151,8 +157,8 @@ const Payment = () => {
                 value={form.values.cvv}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('cvv') ? 'error' : ''}
               />
-              <small>{getErrorMessage('cvv', form.errors.cvv)}</small>
             </S.InputGroup>
           </S.Row>
           <S.Row>
@@ -166,13 +172,8 @@ const Payment = () => {
                 value={form.values.monthExpiration}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('monthExpiration') ? 'error' : ''}
               />
-              <small>
-                {getErrorMessage(
-                  'monthExpiration',
-                  form.errors.monthExpiration
-                )}
-              </small>
             </S.InputGroup>
             <S.InputGroup>
               <label htmlFor="expirationYear">Ano de vencimento</label>
@@ -184,10 +185,8 @@ const Payment = () => {
                 value={form.values.expirationYear}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={checkInputHasError('expirationYear') ? 'error' : ''}
               />
-              <small>
-                {getErrorMessage('expirationYear', form.errors.expirationYear)}
-              </small>
             </S.InputGroup>
           </S.Row>
           <S.ButtomContainer>
@@ -204,9 +203,9 @@ const Payment = () => {
               }}
               title="Cliqe aqui para Comprar"
               type="button"
-              disabled={!form.isValid || !form.dirty}
+              disabled={!form.isValid || !form.dirty || isLoading}
             >
-              Finalizar pagamento
+              {isLoading ? 'Finalizando Compra...' : 'Finalizar Pagamento'}
             </Button>
             {Object.keys(form.errors).length > 0 && (
               <small>

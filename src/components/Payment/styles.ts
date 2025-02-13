@@ -31,6 +31,10 @@ export const InputGroup = styled.div<InputProps>`
     height: 32px;
     background-color: ${colors.PeachCream};
     border: 1px solid ${colors.PeachCream};
+
+    &.error {
+      border: 1px, solid, red;
+    }
   }
   textarea {
     resize: none; /* Impede o redimensionamento */

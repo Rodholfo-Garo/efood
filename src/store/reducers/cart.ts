@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Cardapio } from '../../pages/Home'
 
 // 1ª - Definimos o tipo do estado global do carrinho
 type CartState = {

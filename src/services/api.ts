@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { Restaurantes } from '../pages/Home'
-
 type Products = {
   id: number // Permite qualquer número, não apenas 1
   price: number
@@ -32,6 +30,10 @@ type PurchasePayload = {
   }
 }
 
+type PurchaseResponse = {
+  orderId: string
+}
+
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://fake-api-tau.vercel.app/api/efood/'
@@ -48,7 +50,7 @@ const api = createApi({
     // O post serve para inserir novos dados na API
     // mutation serve para atualizar ou enviar novos dados ao servidor(mudança)
     // any representa a resposta da API, PurchasePayload é o que vamos enviar para a api
-    purchase: builder.mutation<any, PurchasePayload>({
+    purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
       query: (body) => ({
         url: 'checkout',
         method: 'POST',
