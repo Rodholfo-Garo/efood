@@ -33,7 +33,7 @@ export const InputGroup = styled.div<InputProps>`
     border: 1px solid ${colors.PeachCream};
 
     &.error {
-      border: 1px, solid, red;
+      border: 1px solid red;
     }
   }
   textarea {

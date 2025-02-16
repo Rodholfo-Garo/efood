@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import InputMask from 'react-input-mask'
 
 import Button from '../Button'
 import FormCard from '../FormCard'
@@ -18,7 +19,7 @@ const Payment = () => {
   const { items } = useSelector((state: RootReducer) => state.cart)
 
   // Hook para enviar dados para a API
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [purchase, { isLoading }] = usePurchaseMutation()
 
   // Pega os dados de entrega do estado Global
   const deliveryData = useSelector(
@@ -62,8 +63,8 @@ const Payment = () => {
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo  é obrigatorio'),
       cardNumber: Yup.string()
-        .min(16, 'O numero ter 16 caracteres')
-        .max(16, 'O numero ter 16 caracteres')
+        .min(19, 'O numero ter 16 caracteres')
+        .max(19, 'O numero ter 16 caracteres')
         .required('O campo  é obrigatorio'),
       cvv: Yup.string()
         .min(3, 'invalido')
@@ -136,7 +137,7 @@ const Payment = () => {
           <S.Row>
             <S.InputGroup maxWidth="80%">
               <label htmlFor="cardNumber">Número do cartão</label>
-              <input
+              <InputMask
                 id="cardNumber"
                 type="text"
                 required
@@ -145,11 +146,12 @@ const Payment = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={checkInputHasError('cardNumber') ? 'error' : ''}
+                mask="9999.9999.9999.9999"
               />
             </S.InputGroup>
             <S.InputGroup maxWidth="20%">
               <label htmlFor="cvv">CVV</label>
-              <input
+              <InputMask
                 id="cvv"
                 type="text"
                 required
@@ -158,13 +160,14 @@ const Payment = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={checkInputHasError('cvv') ? 'error' : ''}
+                mask="999"
               />
             </S.InputGroup>
           </S.Row>
           <S.Row>
             <S.InputGroup>
               <label htmlFor="monthExpiration">Mês do vencimento</label>
-              <input
+              <InputMask
                 id="monthExpiration"
                 type="text"
                 required
@@ -173,11 +176,12 @@ const Payment = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={checkInputHasError('monthExpiration') ? 'error' : ''}
+                mask="99"
               />
             </S.InputGroup>
             <S.InputGroup>
               <label htmlFor="expirationYear">Ano de vencimento</label>
-              <input
+              <InputMask
                 id="expirationYear"
                 type="text"
                 required
@@ -186,22 +190,32 @@ const Payment = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={checkInputHasError('expirationYear') ? 'error' : ''}
+                mask="9999"
               />
             </S.InputGroup>
           </S.Row>
           <S.ButtomContainer>
             <Button
-              onClick={() => {
-                form.setTouched({
+              onClick={async () => {
+                // Marca todos os campos como tocados
+                await form.setTouched({
                   name: true,
                   cardNumber: true,
                   cvv: true,
                   monthExpiration: true,
                   expirationYear: true
                 })
+
+                // Valida os campos antes de submeter
+                const errors = await form.validateForm()
+                if (Object.keys(errors).length > 0) {
+                  return
+                }
+
+                // Submete o formulário
                 form.submitForm()
               }}
-              title="Cliqe aqui para Comprar"
+              title="Clique aqui para Comprar"
               type="button"
               disabled={!form.isValid || !form.dirty || isLoading}
             >

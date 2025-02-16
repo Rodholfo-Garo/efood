@@ -6,8 +6,10 @@ export const Banner = () => (
   <>
     <Image style={{ backgroundImage: `url(${vetor})` }}>
       <div className="container">
-        <img src={logo} alt="efood" />
-        <h1>Viva experiências gastronômicas no conforto da sua casa</h1>
+        <h1>
+          <img src={logo} alt="efood" />
+        </h1>
+        <h2>Viva experiências gastronômicas no conforto da sua casa</h2>
       </div>
     </Image>
   </>

@@ -4,14 +4,11 @@ import Button from '../Button'
 import FormCard from '../FormCard'
 import { RootReducer } from '../../store'
 import { prevStep } from '../../store/reducers/cart'
-import { usePurchaseMutation } from '../../services/api'
 
 import { ConfirmText } from './styles'
 
 const Confirm = () => {
   const dispatch = useDispatch()
-  const [purchase, { isError, isSuccess, data, isLoading }] =
-    usePurchaseMutation()
 
   const { orderId } = useSelector((state: RootReducer) => state.cart)
 

@@ -15,14 +15,18 @@ export const Image = styled.div`
     align-items: center;
     justify-content: space-between;
     height: 100%;
+
     h1 {
+      line-height: 0;
+    }
+    h2 {
       width: 539px;
       text-align: center;
       font-size: 36px;
       font-weight: 900;
     }
     @media (max-width: ${breakpoints.desktop}) {
-      h1 {
+      h2 {
         width: 100%;
       }
     }

@@ -11,22 +11,10 @@ type Props = {
   disabled?: boolean
 }
 
-export const Button = ({
-  type,
-  title,
-  to,
-  onClick,
-  children,
-  disabled
-}: Props) => {
+export const Button = ({ type, title, to, onClick, children }: Props) => {
   if (type === 'button') {
     return (
-      <S.ButtonContainer
-        type="button"
-        title={title}
-        onClick={onClick}
-        disabled={disabled}
-      >
+      <S.ButtonContainer type="button" title={title} onClick={onClick}>
         {children}
       </S.ButtonContainer>
     )

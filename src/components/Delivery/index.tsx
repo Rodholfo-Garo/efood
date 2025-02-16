@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
+import InputMask from 'react-input-mask'
 
 import Button from '../Button'
 import FormCard from '../FormCard'
@@ -13,7 +14,7 @@ const Delivery = () => {
   const dispatch = useDispatch()
 
   // Hook da API para realizar a compra
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [purchase] = usePurchaseMutation()
 
   // Configuração do Formik para gerenciar o formulário
   const form = useFormik({
@@ -22,7 +23,7 @@ const Delivery = () => {
       address: '',
       city: '',
       cep: '',
-      houseNumber: '',
+      houseNumber: 0,
       complement: ''
     },
 
@@ -37,10 +38,10 @@ const Delivery = () => {
         .min(5, 'O precisa ter pelo menos 5 caracteres')
         .required('O Campo é Obrigatório'),
       cep: Yup.string()
-        .min(8, 'O precisa ter pelo menos 8 caracteres')
-        .max(8, 'O precisa ter pelo menos 8 caracteres')
+        .min(10, 'O precisa ter pelo menos 8 caracteres')
+        .max(10, 'O precisa ter pelo menos 8 caracteres')
         .required('O Campo é Obrigatório'),
-      houseNumber: Yup.string()
+      houseNumber: Yup.number()
         .min(1, 'O precisa ter pelo menos 1 caracteres')
         .required('O Campo é Obrigatório')
     }),
@@ -71,14 +72,6 @@ const Delivery = () => {
   })
 
   console.log(form)
-
-  // const getErrorMessage = (fieldName: string, message?: string) => {
-  //   const isTouched = fieldName in form.touched
-  //   const isInvalid = fieldName in form.errors
-
-  //   if (isTouched && isInvalid) return message
-  //   return ''
-  // }
 
   const checkInputHasError = (fieldName: string) => {
     // Verifica se o Campo Foi manipulado
@@ -145,7 +138,7 @@ const Delivery = () => {
         <S.Row>
           <S.InputGroup>
             <label htmlFor="cep">CEP</label>
-            <input
+            <InputMask
               id="cep"
               type="text"
               required
@@ -154,6 +147,7 @@ const Delivery = () => {
               onChange={form.handleChange}
               onBlur={form.handleBlur}
               className={checkInputHasError('cep') ? 'error' : ''}
+              mask="99.999-999"
             />
           </S.InputGroup>
           <S.InputGroup>
@@ -186,20 +180,27 @@ const Delivery = () => {
 
         <S.ButtomContainer>
           <Button
-            onClick={() => {
-              // Faz a validação dos campos ao clicar no botão
-              form.setTouched({
+            onClick={async () => {
+              // Marca todos os campos como tocados e força a validação
+              await form.setTouched({
                 fullName: true,
                 address: true,
                 city: true,
                 cep: true,
                 houseNumber: true
               })
-              form.submitForm() // Submete o formulário
+              const errors = await form.validateForm()
+
+              // Se houver erros, o formulário não será enviado
+              if (Object.keys(errors).length > 0) {
+                return
+              }
+
+              // Submete o formulário se estiver válido
+              form.submitForm()
             }}
-            title="Cliqe aqui para Comprar"
+            title="Clique aqui para Comprar"
             type="button"
-            disabled={!form.isValid || !form.dirty} // Desabilita se não estiver válido ou se não houver alterações
           >
             Continuar com o pagamento
           </Button>

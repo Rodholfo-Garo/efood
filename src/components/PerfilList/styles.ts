@@ -55,28 +55,43 @@ export const ModalContent = styled.div`
   background-color: ${colors.BlushPink};
   position: relative; // Corrigido de "postion" para "position"
   z-index: 1;
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 0;
+  }
 `
 export const ModalAberto = styled.div`
   display: flex;
+  @media (max-width: ${breakpoints.tablet}) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
   ${ButtonContainer} {
     background-color: ${colors.PeachCream};
     color: ${colors.BlushPink};
     display: block;
     width: 218px;
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 100%;
+      margin: 0 auto;
+    }
   }
 `
 
 export const ModalContentFoto = styled.div`
   img {
-    width: 280px;
+    width: 100%;
     height: 280px;
     margin-right: 24px;
     object-fit: cover;
+    @media (max-width: ${breakpoints.tablet}) {
+      padding-top: 34px;
+    }
   }
 `
 export const ModalContentTexto = styled.div`
   display: block;
+  margin-left: 24px;
 
   h3 {
     font-size: 18px;
@@ -92,6 +107,10 @@ export const ModalContentTexto = styled.div`
 
   button {
     margin-top: 16px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 100%;
+    margin: 0 auto;
   }
 `
 
